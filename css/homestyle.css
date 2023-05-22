@@ -1,0 +1,261 @@
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Times New Roman', Times, serif;
+}
+
+* {
+    box-sizing: border-box;
+  }
+
+body { /*theme*/
+    display: grid;
+    font-family: "Open Sans", sans-serif;
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: url('images/pic01.jpg');
+  }
+
+  /*----- header -----*/
+
+  header {
+    position: sticky;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+header .logo {
+    font-size: 32px;
+    margin: 0;
+    padding: 0;
+    line-height: 1;
+    font-weight: 400;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-left: 10px;
+}
+
+header .logo a {
+    color: white;
+}
+
+.login-register-btn {
+    color: #fff;
+    border-radius: 4px;
+    padding: 7px 25px 8px 25px;
+    white-space: nowrap;
+    transition: 0.5s;
+    font-size: 14px;
+    display: inline-block;
+    border: 3px solid #9393FF;
+    margin-right: 10px;
+}
+
+.login-register-btn:hover {
+    background: #9393FF;
+    color: #151515;
+}
+
+.navbar {
+    padding: 0;
+}
+
+.navbar ul {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    list-style: none;
+    align-items: center;
+}
+
+.navbar li {
+    position: relative;
+}
+
+.navbar a,
+.navbar a:focus {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0 10px 30px;
+    font-size: 15px;
+    font-weight: 600;
+    color: #fff;
+    white-space: nowrap;
+    transition: 0.3s;
+}
+
+.navbar a i,
+.navbar a:focus i {
+    font-size: 12px;
+    line-height: 0;
+    margin-left: 5px;
+}
+
+.navbar a:hover,
+.navbar .active,
+.navbar .active:focus,
+.navbar li:hover>a {
+    color: #9393FF;
+}
+
+.navbar .commodity ul {
+    display: block;
+    position: absolute;
+    left: 14px;
+    top: calc(100% + 30px);
+    margin: 0;
+    padding: 5px 0;
+    z-index: 99;
+    opacity: 0;
+    visibility: hidden;
+    background: #fff;
+    box-shadow: 0px 0px 30px rgba(127, 137, 161, 0.25);
+    transition: 0.3s;
+}
+
+.navbar .commodity ul li {
+    min-width: 200px;
+}
+
+.navbar .commodity ul a {
+    padding: 10px 20px;
+    font-size: 14px;
+    text-transform: none;
+    color: #151515;
+    font-weight: 400;
+}
+
+.navbar .commodity ul a i {
+    font-size: 12px;
+}
+
+.navbar .commodity ul a:hover,
+.navbar .commodity ul .active:hover,
+.navbar .commodity ul li:hover>a {
+    background-color: #9393FF;
+}
+
+.navbar .commodity:hover>ul {
+    opacity: 1;
+    top: 100%;
+    visibility: visible;
+}
+
+/*----- product -----*/
+.product {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin: auto;
+    padding: 2.5em 0;
+    min-width: 800px;
+    background-color: rgba(255, 255, 255, 0.555);
+    border-radius: 4px;
+  }
+
+
+
+
+.product-container::-webkit-scrollbar{
+    display: none;
+}
+
+.product-card{
+    flex: 0 0 auto;
+    width: 250px;
+    height: 450px;
+    margin-right: 10px;
+    margin-left: 40px;
+}
+
+.product-image{
+    position: relative;
+    width: 90%;
+    height: 350px;
+    overflow: hidden;
+}
+
+.product-thumb{
+    width: 100%;
+    height: 350px;
+    object-fit: cover;
+}
+
+.discount-tag{
+    position: absolute;
+    background: #ffffff;
+    padding: 5px;
+    border-radius: 5px;
+    color: #ff7d7d;
+    right: 3px;
+    top: 20px;
+    text-transform: capitalize;
+}
+
+.card-btn{
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 10px;
+    width: 90%;
+    text-transform: capitalize;
+    border: none;
+    outline: none;
+    background: #fff;
+    border-radius: 5px;
+    transition: 0.5s;
+    cursor: pointer;
+    opacity: 0;
+}
+
+.product-card:hover .card-btn{
+    opacity: 1;
+}
+
+.card-btn:hover{
+    background: #efefef;
+}
+
+.product-info{
+    width: 100%;
+    height: 100px;
+    padding-top: 10px;
+    margin-top: -30px;
+}
+
+.product-brand{
+    text-transform: uppercase;
+}
+
+.product-short-des{
+    width: 100%;
+    height: 20px;
+    line-height: 20px;
+    overflow: hidden;
+    opacity: 0.5;
+    text-transform: capitalize;
+    margin: 0px ;
+}
+
+.price{
+    font-weight: 700;
+    font-size: 20px;
+}
+
+.actual-price{
+    margin-left: 20px;
+    opacity: 0.5;
+    text-decoration: line-through;
+    color: red;
+}
+
+/*----- product2 -----*/
+

@@ -1,0 +1,50 @@
+.container{
+    padding: 20px;
+    color:#fff;
+    display: flex;
+    align-items: center;
+}
+.container h2{
+    font-weight: 500;
+}
+
+.product{
+    display: flex;
+    align-items: center;
+    border-bottom:1px #fff solid;
+    
+    margin-bottom: 15px;
+}
+
+.product > img{
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    margin-right: 15px;
+}
+.product > h3, .product > h4, .product >a{
+    margin-right: 15px;
+}
+
+.product >a{
+    display: block;
+    width: 100px;
+    height: 35px ;
+    text-align: center;
+    line-height: 35px;
+    background-color: #e2c107;
+    color:#000;
+}
+
+table tr td{
+    border: 1px #fff solid;
+    padding: 20px;
+    color: #fff;
+}
+
+table tr td img{
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+}
+

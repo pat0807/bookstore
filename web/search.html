@@ -1,0 +1,120 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>線上二手書局</title>
+    <link rel="stylesheet" href="./search.css">
+</head>
+
+<body>
+    <!-- GET POST -->
+ 
+    <header id="header">
+        <div class="logo">
+            <h1 class="logo"><a href="index.php">2nd BS.</a></h1>
+        </div>
+        <nav class="navbar">
+            <ul>
+                <li><a href="index.php">主頁</a></li>
+                <li><a href="about.php">關於我們</a></li>
+                <li class="commodity"><a href="#">商品</a>
+                    <ul>
+                        <li><a href="#">文史哲類</a></li>
+                        <li><a href="#">外語類</a></li>
+                        <li><a href="#">財經類</a></li>
+                        <li><a href="#">管理類</a></li>
+                        <li><a href="#">法政類</a></li>
+                        <li><a href="#">社會與心理類</a></li>
+                        <li><a href="#">大眾傳播類</a></li>
+                        <li><a href="#">教育類</a></li>
+                        <li><a href="#">藝術類</a></li>
+                        <li><a href="#">電機資訊類</a></li>
+                        <li><a href="#">工程類</a></li>
+                        <li><a href="#">建築與設計類</a></li>
+                        <li><a href="#">數理化類</a></li>
+                        <li><a href="#">生命科學類</a></li>
+                        <li><a href="#">生物資源類</a></li>
+                        <li><a href="#">地球與環境科學類</a></li>
+                        <li><a href="#">休閒餐旅類</a></li>
+                        <li><a href="#">醫藥衛生類</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">問題回報</a></li>
+            </ul>
+        </nav>
+        <?php
+            session_start();
+            if($_SESSION['account']<>""){
+            ?>
+            <a href="logout.php" class="login-register-btn">登出</a>   
+            <?php
+                }else{
+            ?>
+            </ul> 
+            </nav>
+            <a href="login.php" class="login-register-btn">登入/註冊</a>
+            <?php   
+                }
+            ?>
+    </header>
+    <div class="shopping">
+        <div class="search-bar">
+            <form action="./search.php" method="GET"> <!-- 這裡跑版了要改 -->
+                <input type="text" name="s" placeholder="搜尋...">
+                <button type="submit"><ion-icon name="search-outline"></ion-icon></button>
+            </form>
+            <div class="cart-icon">
+                <a href="#">
+                    <ion-icon name="cart-outline" id="cart-btn"></ion-icon>
+                </a>
+                <div class="cart">
+                    <h2>YOUR CART</h2>
+                    <div class="cart-content">
+
+                    </div>
+                    <div class="total">
+                        <div class="total-title">Total</div>
+                        <div class="total-price">$0</div>
+                    </div>
+                    <button type="button" class="buy-btn">立刻下單</button>
+                    <ion-icon name="close" id="close-cart"></ion-icon>
+                </div>
+            </div>
+        </div>
+            
+        <div class="container">
+            <?php if (count($products) == 0){?>
+                
+            <?php }else{?>
+            <table class="products">
+                <tr>
+                    <td>圖片</td>
+                    <td>商品名稱</td>
+                    <td>價錢</td>
+                    <td>查看</td>
+                </tr>
+                <?php foreach($products as $product){?>
+                <tr>
+                    <td><img src="<?php echo $product['picture'] ?>" alt=""></td>
+                    <td><?php echo $product['bookname'] ?></td>
+                    <td><?php echo $product['price'] ?></td>
+                    <td><a href="<?php echo $product['id'] ?>">點擊查看</a></td>
+                </tr>
+                <?php }?>
+            </table>
+            <?php }?>
+
+
+
+        </div>
+    </div>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script src="main.js"></script>
+</body>
+
+</html>
