@@ -10,7 +10,7 @@
 	$account = $_POST['account'];
 	$password = $_POST['password'];
 	$link = mysqli_connect('localhost','root','','system');
-	$sql = "select distinct * from memberdata where account = '$account' and password = '$password'";
+	$sql = "select distinct * from memberdata where account = '$account' and password = '$password' AND level >= 2";
 	$result = mysqli_query($link,$sql);
 	if($row=mysqli_fetch_assoc($result)){
 		$_SESSION['account'] = $row['account'];

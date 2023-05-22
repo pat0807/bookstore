@@ -1,5 +1,8 @@
-
 <?php 
+if(isset($_SESSION['level']) && $_SESSION['level'] <3){
+  header("Location: home.php");
+}
+
 if(isset($_POST["action"])&&($_POST["action"]=="add")){
 	include("./conn/connMysqlObj.php");
 	$sql_query = "INSERT INTO product (bookname, sort, description ,author ,price) VALUES (?, ?, ?, ?, ?)";

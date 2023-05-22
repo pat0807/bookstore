@@ -1,4 +1,7 @@
 <?php 
+if(isset($_SESSION['level']) && $_SESSION['level'] <3){
+  header("Location: home.php");
+}
 	include("./conn/connMysqlObj.php");
 	if(isset($_POST["action"])&&($_POST["action"]=="delete")){	
 		$sql_query = "DELETE FROM product WHERE id=?";

@@ -30,7 +30,7 @@
             </li>
             <li><a href="./member.php">會員中心</a></li>
             <?php 
-            if(isset($_SESSION['level']) && $_SESSION['level'] >=2){
+            if(isset($_SESSION['level']) && $_SESSION['level'] >=3){
                 echo '<li><a href="./add.php">新增商品</a></li>';
             }
             ?>

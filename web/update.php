@@ -1,4 +1,7 @@
 <?php
+if(isset($_SESSION['level']) && $_SESSION['level'] <3){
+  header("Location: home.php");
+}
 	include("../conn/connMysqlObj.php");
 	if(isset($_POST["action"])&&($_POST["action"]=="update")){
 		$sql_query = "UPDATE product SET bookname=?, sort=?, description=?, author=?, price=? WHERE id=?";

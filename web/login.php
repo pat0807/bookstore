@@ -1,3 +1,29 @@
+<?php 
+include_once('../conn/connect.php');
+if(isset($_GET['token'])){
+    $token = $_GET['token'];
+    $account = $_GET['account'];
+    $sql = "SELECT * FROM memberdata WHERE token = '$token' AND account = '$account' ";
+
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
+
+    $member = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    if(count($member)>=1){
+        $level = 2;
+        $sql = "UPDATE `memberdata` SET level = :level WHERE token = :token AND account = :account";  // 1
+
+        $stmt = $conn->prepare($sql); // 2
+
+        $stmt->bindParam(':account',$account); // 3
+        $stmt->bindParam(':level',$level); // 3
+        $stmt->bindParam(':token',$token); // 3
+        $stmt->execute();
+        echo "<script> alert('驗證成功！請重新登入') </script>";
+        }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

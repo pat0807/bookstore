@@ -65,7 +65,7 @@ include("./conn/connMysqlObj.php");
             </li>
             <li><a href="./web/member.php">會員中心</a></li>
             <?php 
-            if(isset($_SESSION['level']) && $_SESSION['level'] >=2){
+            if(isset($_SESSION['level']) && $_SESSION['level'] >=3){
                 echo '<li><a href="./web/add.php">新增商品</a></li>';
             }
             ?>
