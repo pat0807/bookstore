@@ -10,7 +10,7 @@
 <body>
 <header id="header">
         <div class="logo">
-            <h1 class="logo"><a href="index.php">2nd BS.</a></h1>
+            <h1 class="logo"><a href="../index.php">2nd BS.</a></h1>
         </div>
     </header>
     <section>
@@ -21,8 +21,13 @@
                     <h2>REGISTRATION</h2>
                     <div class="inputbox">
                         <ion-icon name="person-outline"></ion-icon>
-                        <input type="user" name="account" required>
+                        <input type="text" name="account" required>
                         <label for="">使用者名稱 / 帳號</label>
+                    </div>
+                    <div class="inputbox">
+                        <ion-icon name="person-outline"></ion-icon>
+                        <input type="email" name="email" required>
+                        <label for="">email</label>
                     </div>
                     <div class="inputbox">
                         <ion-icon name="lock-closed-outline"></ion-icon>
@@ -34,21 +39,10 @@
                         <input type="password" name="confirm_password"required>
                         <label for="">確認密碼</label>
                     </div>
-                    <div class="verify">
-                        <h4 style="color:white;display:inline">驗證碼：</h4>
-                        <h3 style="color:white;display:inline" id="verify">
-                            
-                        </h3>
-                    </div>
-                    <div class="inputbox">
-                        <ion-icon name="checkmark-done-outline"></ion-icon>
-                        <input type="text" name="verify"required id="input_code">
-                        <label for="">請輸入驗證碼</label>
-                    </div>
                     <div class="forget">
                         <label for=""><input type="checkbox">已了解相關<a href="#">使用條款</a></label>
                     </div>
-                    <button class="register_btn" type="button" id="register_btn">註冊</button>
+                    <button class="register_btn" type="submit" id="register_btn">註冊</button>
                     <div class="register">
                         <p>已經有帳號了！<a href="login.php">登入</a></p>
                     </div>

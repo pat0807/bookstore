@@ -1,4 +1,12 @@
-<?php session_start()?>
+<?php 
+session_start();
+
+if(isset($_SESSION['name']) === false){
+    header("Location: login.php");
+}
+
+?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -12,7 +20,7 @@
 <body>
 <header id="header">
         <div class="logo">
-            <h1 class="logo"><a href="index.php">2nd BS.</a></h1>
+            <h1 class="logo"><a href="../index.php">2nd BS.</a></h1>
         </div>
     </header>
     <section>

@@ -23,7 +23,7 @@ if(isset($_POST["action"])&&($_POST["action"]=="add")){
 <body>
 
 
-<p align="center"><a href="home.php">回主畫面</a></p>
+<p align="center"><a href="../index.php">回主畫面</a></p>
 <form action="" method="post" name="formAdd" id="formAdd">
   <table border="1" align="center" cellpadding="4">
     <tr>

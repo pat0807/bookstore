@@ -32,7 +32,7 @@ print_r($product);
 <body>
     <header id="header">
         <div class="logo">
-            <h1 class="logo"><a href="index.php">2nd BS.</a></h1>
+            <h1 class="logo"><a href="../index.php">2nd BS.</a></h1>
         </div>
 
     <section class="product">

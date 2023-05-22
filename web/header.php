@@ -1,11 +1,11 @@
 <header id="header">
     <div class="logo">
-        <h1 class="logo"><a href="./">2nd BS.</a></h1>
+        <h1 class="logo"><a href="../index.php">2nd BS.</a></h1>
     </div>
     <nav class="navbar">
         <ul>
-            <li><a href="#">主頁</a></li>
-            <li><a href="#">關於我們</a></li>
+            <li><a href="../index.php">主頁</a></li>
+            <li><a href="./about.php">關於我們</a></li>
             <li class="commodity"><a href="#">商品</a>
                 <ul>
                     <li><a href="./web/home.php?sort=1">文史哲類</a></li>
@@ -28,21 +28,26 @@
                     <li><a href="./web/home.php?sort=18">醫藥衛生類</a></li>
                 </ul>
             </li>
-            <li><a href="member.php">會員中心</a></li>
-            <li><a href="add.php">新增商品</a></li>
+            <li><a href="./member.php">會員中心</a></li>
+            <?php 
+            if(isset($_SESSION['level']) && $_SESSION['level'] >=2){
+                echo '<li><a href="./add.php">新增商品</a></li>';
+            }
+            ?>
+            
         <?php
         session_start();
         if(isset($_SESSION['account'])){
         ?>
         </ul> 
         </nav>
-        <a href="logout.php" class="login-register-btn">登出</a>   
+        <a href="./logout.php" class="login-register-btn">登出</a>   
         <?php
         }else{
         ?>
         </ul> 
     </nav>
-    <a href="login.php" class="login-register-btn">登入/註冊</a>
+    <a href="./login.php" class="login-register-btn">登入/註冊</a>
     <?php   
         }
     ?>

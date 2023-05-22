@@ -25,7 +25,7 @@
 </head>
 <body>
 
-<p align="center"><a href="index.php">回主畫面</a></p>
+<p align="center"><a href="./index.php">回主畫面</a></p>
 <form action="" method="post" name="formDel" id="formDel">
   <table border="1" align="center" cellpadding="4">
     <tr>
