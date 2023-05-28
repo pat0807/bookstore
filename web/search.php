@@ -63,7 +63,7 @@ include("../conn/connMysqlObj.php");
                     <td><img src="<?php echo $product['picture'] ?>" alt=""></td>
                     <td><?php echo $product['bookname'] ?></td>
                     <td><?php echo $product['price'] ?></td>
-                    <td><a href="<?php echo $product['id'] ?>">點擊查看</a></td>
+                    <td><?php echo"<a href='detail.php?id=".$product["id"]."'>點擊查看</a> "?></td>
                     <td><?php echo"<a href='update.php?id=".$product["id"]."'>修改</a> "?>
                     <td><?php echo"<a href='delete.php?id=".$product["id"]."'>刪除</a>"?>
                     
