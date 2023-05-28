@@ -155,7 +155,7 @@ include("./conn/connMysqlObj.php");
                     <a href='./web/detail.php?id=<?php echo $product['id'] ?>'><img src="<?php echo $product['picture']?>" class="product-img"></a>
                     <h2 class="product-title"><?php echo $product['bookname']?></h2>
                     <span class="price">$<?php echo $product['price']?></span>
-                    <ion-icon name="bag-handle-outline" class="add-cart"></ion-icon>
+                    <ion-icon name="bag-handle-outline" class="add-cart"><i class="fa-solid fa-cart-shopping"></i></ion-icon>
                 </div> 
                 <?php }?>  
             </div>
