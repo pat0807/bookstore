@@ -1,5 +1,5 @@
 <?php
-include_once('./conn/connect.php');
+include_once('../conn/connect.php');
 
 if(isset($_GET["id"])){
 $id = $_GET["id"];
@@ -13,7 +13,6 @@ $stmt->execute();
 
 $product = $stmt->fetch(PDO::FETCH_ASSOC);
 
-print_r($product);
 }
 // $sql_query = "SELECT * FROM product ORDER BY id ASC";
 // $result = $db_link->query($sql_query);
@@ -23,7 +22,7 @@ print_r($product);
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../css/style.css">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
