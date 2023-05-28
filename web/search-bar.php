@@ -15,7 +15,6 @@
             const cartui = document.getElementById('cartui')
             const cartClose =document.getElementById('cartClose')
             let open = false
-            console.log(123);
             cartClose.addEventListener('click', ()=>{
                 open = false
                 if(open){
