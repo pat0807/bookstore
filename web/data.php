@@ -29,57 +29,9 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <!-- GET POST -->
  
     <?php include('./header.php') ?>
-    <div class="cart" id="cartui">
-        <i class="fa-solid fa-circle-xmark" id="cartClose"></i>
-        <h2>YOUR CART</h2>
-        <div class="cart-content">
-
-        </div>
-        <div class="total">
-            <div class="total-title">Total</div>
-            <div class="total-price">$0</div>
-        </div>
-        <button type="button" class="buy-btn">立刻下單</button>
-        <ion-icon name="close" id="close-cart"></ion-icon>
-    </div>
+    <?php include('./cart.php') ?>
     <div class="shopping">
-        <div class="search-bar">
-            <form action="./search.php" method="GET"> <!-- 這裡跑版了要改 -->
-                <input type="text" name="s" placeholder="搜尋...">
-                <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
-            </form>
-            <div class="cart-icon" >
-                <a href="javascript:;" id="cartBtn">
-                    <!-- <ion-icon name="cart-outline" id="cart-btn"></ion-icon> -->
-                    <i class="fa-solid fa-cart-shopping"></i>
-                </a>
-            </div>
-        </div>
-            
-        <script>
-            const cartBtn = document.getElementById('cartBtn')
-            const cartui = document.getElementById('cartui')
-            const cartClose =document.getElementById('cartClose')
-            let open = false
-            console.log(123);
-            cartClose.addEventListener('click', ()=>{
-                open = false
-                if(open){
-                    cartui.style.right = '0'
-                }else{
-                    cartui.style.right = '-100%'
-                }
-            })
-            cartBtn.addEventListener('click' , ()=>{
-                open = true
-                if(open){
-                    cartui.style.right = '0'
-                }else{
-                    cartui.style.right = '-100%'
-                }
-            })
-        </script>
-
+        <?php include('./search-bar.php') ?>
 
         <div class="container">
             <?php if (count($products) == 0){?>
