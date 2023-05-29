@@ -158,6 +158,8 @@ include("./conn/connMysqlObj.php");
                     <ion-icon name="bag-handle-outline" class="add-cart" onclick="this.parentNode.submit()"><i class="fa-solid fa-cart-shopping"></i></ion-icon>
                     <input type="hidden" value="<?php echo $product['id'] ?>" name="id" >
                     <input type="hidden" value="1" name="quantity">
+                    <input type="hidden" value="<?php echo $product['bookname']?>" name="bookname">
+                    <input type="hidden" value="<?php echo $product['price']?>" name="price">
                 </form> 
                 <?php }?>  
             </div>
