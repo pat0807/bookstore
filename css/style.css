@@ -629,3 +629,41 @@ input:valid~label {
 #tabs_btn1 {
     color: #9393FF;
 }
+
+
+/* 新增 */
+
+.cart h2, .cart h3, .cart p, .cart span{
+    color:#000;
+}
+
+.cart-item{
+    display: flex;
+    align-items: flex-start;
+    border-bottom:1px #ccc solid;
+    margin-bottom: 12px;
+    padding: 8px 0;
+    
+}
+.cart-item img{
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+}
+.cart-item .text{
+    display: flex;
+    flex-direction: column;
+}
+
+.cart-item .text h3{
+    font-size: 16px;
+}
+
+.cart-item .text label{
+    display: flex;
+    align-items: center;
+}
+.cart-item .text label input[type='number']{
+    width: 50px;
+    margin:0 10px
+}
