@@ -1,4 +1,6 @@
 <?php
+
+include_once('../conn/connect.php');
     use PHPMailer\PHPMailer\SMTP;
     use PHPMailer\PHPMailer\PHPMailer;
     use PHPMailer\PHPMailer\Exception;
@@ -17,12 +19,27 @@
     $charsetLength = strlen($charset);
     $tokenLength = 30;
 
+
+    $sql = "SELECT * FROM memberdata WHERE account = :account OR email = :email"; // 1
+    $stmt = $conn->prepare($sql); // 2
+    $stmt->bindParam(':account',$account); // 3
+    $stmt->bindParam(':email',$email);
+    $stmt->execute(); // 4
+
+    $member = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    if(count($member) >=1){
+      header("location:../index.php?method=message&message=已有相同帳號，請更換帳號");
+    }
+
     for ($i = 0; $i < $tokenLength; $i++) {
         $token .= $charset[rand(0, $charsetLength - 1)];
     }
     if($password != $confirm_password){
-      header("location:index.php?method=message&message=請輸入相同密碼");
-    }
+      header("location:../index.php?method=message&message=請輸入相同密碼");
+    }elseif(count($member) >=1){
+        header("location:../index.php?method=message&message=已有相同帳號，請更換帳號");
+      }
     else{
       $link = mysqli_connect('localhost','root','','system');
 
@@ -72,4 +89,4 @@
     }
 
  ?>
- 請檢查信箱
+請檢查信箱

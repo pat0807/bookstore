@@ -151,17 +151,18 @@ include("./conn/connMysqlObj.php");
             </div>
             <div class="product">
                 <?php foreach($products as $product){?>
-                <div class="product-box">
+                <form class="product-box" action="./web/addcart.php" method="post">
                     <a href='./web/detail.php?id=<?php echo $product['id'] ?>'><img src="<?php echo $product['picture']?>" class="product-img"></a>
                     <h2 class="product-title"><?php echo $product['bookname']?></h2>
                     <span class="price">$<?php echo $product['price']?></span>
-                    <ion-icon name="bag-handle-outline" class="add-cart"><i class="fa-solid fa-cart-shopping"></i></ion-icon>
-                </div> 
+                    <ion-icon name="bag-handle-outline" class="add-cart" onclick="this.parentNode.submit()"><i class="fa-solid fa-cart-shopping"></i></ion-icon>
+                    <input type="hidden" value="<?php echo $product['id'] ?>" name="id" >
+                    <input type="hidden" value="1" name="quantity">
+                </form> 
                 <?php }?>  
             </div>
         </div>
     </div>
-    
     <!-- <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     <script src="./js/main.js"></script> -->
