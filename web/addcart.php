@@ -30,5 +30,5 @@ print_r($cart_items);
 
 setcookie('cart_items',json_encode($cart_items),time() + 3600,'/');
 
-
+echo '132';
 ?>
