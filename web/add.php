@@ -39,28 +39,27 @@ if(isset($_POST["action"])&&($_POST["action"]=="add")){
     <tr>
       <td><font color="white">分類</font></td><td>
         <select name="sort" id="sort">
-    <option value="" selected disabled>請選擇分類</option>
-    <option value="1">文史哲類</option>
-    <option value="2">外語類</option>
-    <option value="3">財經類</option>
-    <option value="4">管理類</option>
-    <option value="5">法政類</option>
-    <option value="6">社會與心理類</option>
-    <option value="7">大眾傳播類</option>
-    <option value="8">教育類</option>
-    <option value="9">藝術類</option>
-    <option value="10">電機資訊類</option>
-    <option value="11">工程類</option>
-    <option value="12">建築與設計類</option>
-    <option value="13">數理化類</option>
-    <option value="14">生命科學類</option>
-    <option value="15">生物資源類</option>
-    <option value="16">地球與環境科學類</option>
-    <option value="17">休閒餐旅類</option>
-    <option value="18">醫藥衛生類</option>
-
-</select>
-</td>
+          <option value="" selected disabled>請選擇分類</option>
+          <option value="1">文史哲類</option>
+          <option value="2">外語類</option>
+          <option value="3">財經類</option>
+          <option value="4">管理類</option>
+          <option value="5">法政類</option>
+          <option value="6">社會與心理類</option>
+          <option value="7">大眾傳播類</option>
+          <option value="8">教育類</option>
+          <option value="9">藝術類</option>
+          <option value="10">電機資訊類</option>
+          <option value="11">工程類</option>
+          <option value="12">建築與設計類</option>
+          <option value="13">數理化類</option>
+          <option value="14">生命科學類</option>
+          <option value="15">生物資源類</option>
+          <option value="16">地球與環境科學類</option>
+          <option value="17">休閒餐旅類</option>
+          <option value="18">醫藥衛生類</option>
+        </select>
+      </td>
     </tr>
     
     <tr>

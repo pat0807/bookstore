@@ -4,10 +4,6 @@ if(isset($_COOKIE['cart_items'])){
 }else{
     $cart_items = [];
 }
-
-print_r($cart_items);
-
-
 ?>
 
 <div class="cart" id="cartui">

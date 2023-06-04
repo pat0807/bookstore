@@ -1,5 +1,5 @@
 <?php
-include_once('./conn/connect.php');
+include_once('../conn/connect.php');
 
 $sort = isset($_GET['sort']) ? $_GET['sort'] : null;
 
@@ -90,16 +90,16 @@ include("./conn/connMysqlObj.php");
 <?php include('./web/cart.php') ?>
     <div class="shopping">
     <div class="search-bar">
-            <form action="./web/search.php" method="GET"> <!-- 這裡跑版了要改 -->
-                <input type="text" name="s" placeholder="搜尋...">
-                <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
-            </form>
-            <div class="cart-icon" >
-                <a href="javascript:;" id="cartBtn">
-                    <i class="fa-solid fa-cart-shopping"></i>
-                </a>
-            </div>
+        <form action="./search.php" method="GET"> 
+            <input type="text" name="s" placeholder="搜尋...">
+            <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+        </form>
+        <div class="cart-icon" >
+            <a href="javascript:;" id="cartBtn">
+                <i class="fa-solid fa-cart-shopping"></i>
+            </a>
         </div>
+    </div>
             
         <script>
             const cartBtn = document.getElementById('cartBtn')

@@ -24,9 +24,7 @@ if(isset($_COOKIE['cart_items'])){
     $cart_items = [];
     array_push($cart_items,['id'=>$id,'quantity'=>$quantity,'bookname'=>$bookname,'price'=>$price]);
 }
-
-
-print_r($cart_items);
+header("Location: ../index.php");
 
 setcookie('cart_items',json_encode($cart_items),time() + 3600,'/');
 
