@@ -76,13 +76,13 @@ include("./conn/connMysqlObj.php");
         ?>
         </ul> 
         </nav>
-        <a href="./web/logout.php" class="login-register-btn">登出</a>   
+        <a href="./logout.php" class="login-register-btn">登出</a>   
         <?php
         }else{
         ?>
         </ul> 
     </nav>
-    <a href="./web/login.php" class="login-register-btn">登入/註冊</a>
+    <a href="./login.php" class="login-register-btn">登入/註冊</a>
     <?php   
         }
     ?>
