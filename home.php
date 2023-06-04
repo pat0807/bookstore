@@ -1,5 +1,5 @@
 <?php
-include_once('../conn/connect.php');
+include_once('./conn/connect.php');
 
 $sort = isset($_GET['sort']) ? $_GET['sort'] : null;
 

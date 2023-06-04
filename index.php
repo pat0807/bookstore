@@ -25,11 +25,11 @@
           $method = isset($_GET['method']) ? $_GET['method'] : '';
           switch($method)
           {
-            case "register": include "web/register.php"; break;
-            case "message": include "web/message.php"; break;
-            case "login": include "web/login.php"; break;
-            case "logout": include "web/logout.php"; break;
-                      default: include "web/home.php"; break;
+            case "register": include "register.php"; break;
+            case "message": include "message.php"; break;
+            case "login": include "login.php"; break;
+            case "logout": include "logout.php"; break;
+                      default: include "home.php"; break;
           }
 				?>
 
