@@ -20,11 +20,12 @@
 		$_SESSION['phone'] = $row['phone'];
 		$_SESSION['school'] = $row['school'];
 		$_SESSION['level'] = $row['level'];
+		$_SESSION['id'] = $row['id'];
 
 
-		header("location:../index.php?method=messagep&message=Login Success");
+		header("location:./?method=messagep&message=Login Success");
 	}else{
-		header("location:../index.php?method=message&message=Login Failed");
+		header("location:./?method=message&message=Login Failed");
 	}
 	?>
 </html>

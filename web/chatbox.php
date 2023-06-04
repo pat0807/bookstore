@@ -2,10 +2,10 @@
     session_start();
     include("../conn/connect.php");
     include("links.php");
-
+    $connect=mysqli_connect("localhost","root","","system"); 
     
-    if (isset($_SESSION['nameid']) && $_SESSION['nameid'] !== "") {
-        $nameid = $_SESSION['nameid'];
+    if (isset($_SESSION['id']) && $_SESSION['id'] !== "") {
+        $nameid = $_SESSION['id'];
         
         $name = mysqli_query($connect, "SELECT * FROM memberdata WHERE id = '".$nameid."'")
             or die("Failed to query the database: ".mysqli_error($connect));
@@ -66,20 +66,20 @@
                         <div class="modal-body" id="msgBody" style="height:400px; overflow-y: scroll; overflow-x: hidden;">
                             <?php
                                 if(isset($_GET["toUser"])) 
-                                    $chats = mysqli_query($connect, "SELECT * FROM messages where (FromUser = '".$_SESSION["nameid"]."' AND
-                                        ToUser = '".$_GET["toUser"]."') OR (FromUser = '".$_GET["toUser"]."' AND ToUser = '".$_SESSION["nameid"]
+                                    $chats = mysqli_query($connect, "SELECT * FROM messages where (FromUser = '".$_SESSION["id"]."' AND
+                                        ToUser = '".$_GET["toUser"]."') OR (FromUser = '".$_GET["toUser"]."' AND ToUser = '".$_SESSION["id"]
                                         ."')")
                                     or die("Failed to query database");
                                 else
-                                    $chats = mysqli_query($connect, "SELECT * FROM messages where (FromUser = '".$_SESSION["nameid"]."' AND
-                                        ToUser = '".$_SESSION["toUser"]."') OR (FromUser = '".$_SESSION["toUser"]."' AND ToUser = '".$_SESSION["nameid"]
+                                    $chats = mysqli_query($connect, "SELECT * FROM messages where (FromUser = '".$_SESSION["id"]."' AND
+                                        ToUser = '".$_SESSION["toUser"]."') OR (FromUser = '".$_SESSION["toUser"]."' AND ToUser = '".$_SESSION["id"]
                                         ."')")
                                     or die("Failed to query database");
 
 
                                     while($chat = mysqli_fetch_assoc($chats))
                                     {
-                                        if($chat["FromUser"] == $_SESSION["nameid"])
+                                        if($chat["FromUser"] == $_SESSION["id"])
                                             echo "<div style= 'text-align:right;'>
                                                     <p style= 'background-color:lightblue; word-wrap:break-word; display:inline-block;
                                                         padding:5px; border-radius:10px; max-width:70%;'>

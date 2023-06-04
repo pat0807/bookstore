@@ -15,5 +15,5 @@
     unset($_SESSION['phone']);
     unset($_SESSION['school']);
     unset($_SESSION['level']);
-    header("location:../index.php?method=message&message=You've Logged Out！");
+    header("location:./?method=message&message=You've Logged Out！");
 ?>

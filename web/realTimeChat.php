@@ -1,6 +1,6 @@
 <?php
     include("../conn/connect.php");
-
+    $connect=mysqli_connect("localhost","root","","system"); 
     $fromUser = $_POST["fromUser"];
     $toUser = $_POST["toUser"];
     $output = "";
