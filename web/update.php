@@ -2,23 +2,116 @@
 if(isset($_SESSION['level']) && $_SESSION['level'] <3){
   header("Location: home.php");
 }
-	include("../conn/connMysqlObj.php");
-	if(isset($_POST["action"])&&($_POST["action"]=="update")){
-		$sql_query = "UPDATE product SET bookname=?, sort=?, description=?, author=?, price=? WHERE id=?";
-		$stmt = $db_link -> prepare($sql_query);
-		$stmt -> bind_param("ssssss",   $_POST["bookname"], $_POST["sort"], $_POST["description"], $_POST["author"], $_POST["price"], $_POST["id"]);
-		$stmt -> execute();
-		$stmt -> close();
-		$db_link -> close();
-		//重新導向回到主畫面
-		header("Location: search.php");
-	}
-	$sql_select = "SELECT id, bookname, sort, description, author, price FROM product WHERE id = ?";
-	$stmt = $db_link -> prepare($sql_select);
-	$stmt -> bind_param("s", $_GET["id"]);
-	$stmt -> execute();
-	$stmt -> bind_result($id, $bookname, $sort, $description, $author, $price);
-	$stmt -> fetch();
+	
+  include("../conn/connMysqlObj.php");
+  $sql_select = "SELECT id, bookname, sort, description, author, price FROM product WHERE id = ?";
+  $stmt = $db_link -> prepare($sql_select);
+  $stmt -> bind_param("s", $_GET["id"]);
+  $stmt -> execute();
+  $stmt -> bind_result($id, $bookname, $sort, $description, $author, $price);
+  $stmt -> fetch();
+  include("../conn/connect.php");
+	if(isset($_FILES['picture'])){
+    if($_FILES['picture']['name']!=""){
+      if(isset($_POST['id'])){
+        $id = $_POST['id'];
+        $bookname = $_POST['bookname'];
+        $sort = $_POST['sort'];
+        $description = $_POST['description'];
+        $author = $_POST['author'];
+        $price = $_POST['price'];
+  
+          $rand = strval(rand(1000,1000000));
+          $sql_str = "UPDATE product SET bookname=:bookname,sort=:sort,description=:description,author=:author,price=:price,picture=:picture WHERE id  = :id";
+          $stmt = $conn->prepare($sql_str);
+  
+  
+          $file      = $_FILES['picture'];       //上傳檔案信息
+          $file_name = $file['name'];                //上傳檔案的原來檔案名稱
+          $file_type = $file['type'];                //上傳檔案的類型(副檔名)
+          $tmp_name  = $file['tmp_name'];            //上傳到暫存空間的路徑/檔名
+          $file_size = $file['size'];                //上傳檔案的檔案大小(容量)
+          $error     = $file['error'];   
+          $imgsrc = $rand.$file_name;
+          
+          $stmt -> bindParam(':id' ,$id);
+          $stmt -> bindParam(':bookname' ,$bookname);
+          $stmt -> bindParam(':sort' ,$sort);
+          $stmt -> bindParam(':description' ,$description);
+          $stmt -> bindParam(':author' ,$author);
+          $stmt -> bindParam(':price' ,$price);
+          $stmt -> bindParam(':picture' ,$imgsrc);
+          $stmt ->execute();
+  
+          $allow_ext = array('jpeg', 'jpg', 'png', 'gif','JPG','JPEG','PNG','GIF');
+              //設定上傳位置
+          $path = '../images/upload/';
+          if (!file_exists($path)) { mkdir($path); }
+          // $path2 = '../images/img_upload2/';
+          // if (!file_exists($path2)) { mkdir($path2); }
+      
+          //2.判斷上傳沒有錯誤時 => 檢查限制的條件 =============================================
+          if ($error == 0) {
+          $ext = pathinfo($file_name, PATHINFO_EXTENSION);
+          //in_array($ext, $allow_ext) 判斷 $ext變數的值 是否在 $allow_ext 這個陣列變數中
+          if (!in_array($ext, $allow_ext)) {
+              exit('檔案類型不符合，請選擇 jpeg, jpg, png, gif 檔案');
+          }
+          //搬移檔案
+          $result = move_uploaded_file($tmp_name, $path.$file_name);
+          // echo '<br>---------檔案傳送' . $result;
+          
+          if (file_exists($path.$file_name)) {
+              //拷貝檔案
+              $result = copy($path.$file_name, $path.$rand.$file_name);
+              // echo '<br>---------檔案拷貝' . $result;
+              //刪除檔案
+              $result = unlink($path.$file_name);
+              // echo '<br>---------檔案刪除' . $result;
+          }
+          // header('Location:newsCreate.php');
+      
+          } else {
+          //這裡表示上傳有錯誤, 匹配錯誤編號顯示對應的訊息
+          switch ($error) {
+              case 1:  echo '上傳檔案超過 upload_max_filesize 容量最大值';  break;
+              case 2:  echo '上傳檔案超過 post_max_size 總容量最大值';  break;
+              case 3:  echo '檔案只有部份被上傳';  break;
+              case 4:  echo '沒有檔案被上傳';  break;
+              case 6:  echo '找不到主機端暫存檔案的目錄位置';  break;
+              case 7:  echo '檔案寫入失敗';  break;
+              case 8:  echo '上傳檔案被PHP程式中斷，表示主機端系統錯誤';  break;
+          }
+          }
+          echo "<script>alert('更新成功!');window.location.href = '../index.php' </script>";
+      }
+  
+  }else{
+      if(isset($_POST['id'])){
+          
+        $id = $_POST['id'];
+        $bookname = $_POST['bookname'];
+        $sort = $_POST['sort'];
+        $description = $_POST['description'];
+        $author = $_POST['author'];
+        $price = $_POST['price'];
+  
+          $rand = strval(rand(1000,1000000));
+          $sql_str = "UPDATE product SET bookname=:bookname,sort=:sort,description=:description,author=:author,price=:price WHERE id  = :id";
+          $stmt = $conn->prepare($sql_str);
+          
+          $stmt -> bindParam(':id' ,$id);
+          $stmt -> bindParam(':bookname' ,$bookname);
+          $stmt -> bindParam(':sort' ,$sort);
+          $stmt -> bindParam(':description' ,$description);
+          $stmt -> bindParam(':author' ,$author);
+          $stmt -> bindParam(':price' ,$price);
+          $stmt ->execute();
+  
+          echo "<script>alert('更新成功!');window.location.href = '../index.php' </script>";
+      }
+  }
+  }
 ?>
 <html>
 <head>
@@ -28,8 +121,8 @@ if(isset($_SESSION['level']) && $_SESSION['level'] <3){
 </head>
 <body>
 
-<p align="center"><a href="index.php">回主畫面</a></p>
-<form action="" method="post" name="formFix" id="formFix">
+<p align="center"><a href="../index.php">回主畫面</a></p>
+<form action="" method="post" name="formFix" id="formFix" enctype="multipart/form-data">
   <table border="1" align="center" cellpadding="4">
     <tr>
       <th><font color="white">欄位</font></th><th><font color="white">資料</font></th>
@@ -39,26 +132,25 @@ if(isset($_SESSION['level']) && $_SESSION['level'] <3){
     </tr>
     <tr>
       <td><font color="white">分類</font></td><td>
-        <select name="sort" id="sort">
-    <option value="" selected disabled>請選擇分類</option>
-    <option value="1">文史哲類</option>
-    <option value="2">外語類</option>
-    <option value="3">財經類</option>
-    <option value="4">管理類</option>
-    <option value="5">法政類</option>
-    <option value="6">社會與心理類</option>
-    <option value="7">大眾傳播類</option>
-    <option value="8">教育類</option>
-    <option value="9">藝術類</option>
-    <option value="10">電機資訊類</option>
-    <option value="11">工程類</option>
-    <option value="12">建築與設計類</option>
-    <option value="13">數理化類</option>
-    <option value="14">生命科學類</option>
-    <option value="15">生物資源類</option>
-    <option value="16">地球與環境科學類</option>
-    <option value="17">休閒餐旅類</option>
-    <option value="18" >醫藥衛生類</option>
+        <select name="sort" id="sort" value="<?php echo $sort ?>" >
+            <option value="1">文史哲類</option>
+            <option value="2">外語類</option>
+            <option value="3">財經類</option>
+            <option value="4">管理類</option>
+            <option value="5">法政類</option>
+            <option value="6">社會與心理類</option>
+            <option value="7">大眾傳播類</option>
+            <option value="8">教育類</option>
+            <option value="9">藝術類</option>
+            <option value="10">電機資訊類</option>
+            <option value="11">工程類</option>
+            <option value="12">建築與設計類</option>
+            <option value="13">數理化類</option>
+            <option value="14">生命科學類</option>
+            <option value="15">生物資源類</option>
+            <option value="16">地球與環境科學類</option>
+            <option value="17">休閒餐旅類</option>
+            <option value="18" >醫藥衛生類</option>
 
 </select>
 </td>
@@ -71,6 +163,9 @@ if(isset($_SESSION['level']) && $_SESSION['level'] <3){
     </tr>
     <tr>
       <td><font color="white">價格</font></td><td><input type="text" name="price" id="price" value="<?php echo $price;?>"></td>
+    </tr>
+    <tr>
+      <td><font color="white">圖片</font></td><td><input type="file" name="picture" id="picture"></td>
     </tr>
     
   
@@ -85,7 +180,3 @@ if(isset($_SESSION['level']) && $_SESSION['level'] <3){
 </form>
 </body>
 </html>
-<?php 
-	$stmt -> close();
-	$db_link -> close();
-?>

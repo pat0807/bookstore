@@ -1,8 +1,8 @@
-<?php 
+<!-- <?php 
 if(isset($_SESSION['level']) && $_SESSION['level'] <3){
   header("Location: home.php");
 }
-	include("./conn/connMysqlObj.php");
+	include("../conn/connMysqlObj.php");
 	if(isset($_POST["action"])&&($_POST["action"]=="delete")){	
 		$sql_query = "DELETE FROM order WHERE id=?";
 		$stmt = $db_link -> prepare($sql_query);
@@ -19,7 +19,7 @@ if(isset($_SESSION['level']) && $_SESSION['level'] <3){
 	$stmt -> execute();
 	$stmt -> bind_result($id, $customerid, $order_time);
 	$stmt -> fetch();
-?>
+?> -->
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />

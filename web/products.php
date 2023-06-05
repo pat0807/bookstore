@@ -1,6 +1,5 @@
 <?php
 include_once('../conn/connect.php');
-
 $sort = isset($_GET['sort']) ? $_GET['sort'] : null;
 
 $keyword = isset($_GET['s']) ? $_GET['s'] : null;
@@ -66,12 +65,17 @@ include("../conn/connMysqlObj.php");
             </div>
             <div class="product">
                 <?php foreach($products as $product){?>
-                <div class="product-box">
-                    <a href='./web/detail.php?id=<?php echo $product['id'] ?>'><img src="<?php echo $product['picture']?>" class="product-img"></a>
+                    <form class="product-box" action="./addcart2.php" method="post">
+                    <a href='./detail.php?id=<?php echo $product['id'] ?>'><img src="../images/upload/<?php echo $product['picture']?>" class="product-img"></a>
                     <h2 class="product-title"><?php echo $product['bookname']?></h2>
                     <span class="price">$<?php echo $product['price']?></span>
-                    <ion-icon name="bag-handle-outline" class="add-cart"><i class="fa-solid fa-cart-shopping"></i></ion-icon>
-                </div> 
+                    <ion-icon name="bag-handle-outline" class="add-cart" onclick="this.parentNode.submit()"><i class="fa-solid fa-cart-shopping"></i></ion-icon>
+                    <input type="hidden" value="<?php echo $product['id'] ?>" name="id" >
+                    <input type="hidden" value="1" name="quantity">
+                    <input type="hidden" value="<?php echo $product['bookname']?>" name="bookname">
+                    <input type="hidden" value="<?php echo $product['price']?>" name="price">
+                    <input type="hidden" value="<?php echo $product['picture']?>" name="picture">
+                </form>
                 <?php }?>  
             </div>
         </div>

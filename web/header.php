@@ -1,3 +1,4 @@
+<?php session_start();?>
 <header id="header">
     <div class="logo">
         <h1 class="logo"><a href="../index.php">2nd BS.</a></h1>
@@ -36,7 +37,6 @@
             ?>
             
         <?php
-        session_start();
         if(isset($_SESSION['account'])){
         ?>
         </ul> 

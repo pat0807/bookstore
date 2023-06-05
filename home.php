@@ -1,6 +1,7 @@
 <?php
 include_once('./conn/connect.php');
-
+$ishome = true;
+session_start();
 $sort = isset($_GET['sort']) ? $_GET['sort'] : null;
 
 $keyword = isset($_GET['s']) ? $_GET['s'] : null;
@@ -71,7 +72,6 @@ include("./conn/connMysqlObj.php");
             }
             ?>
         <?php
-        session_start();
         if(isset($_SESSION['account'])){
         ?>
         </ul> 
@@ -90,7 +90,7 @@ include("./conn/connMysqlObj.php");
 <?php include('./web/cart.php') ?>
     <div class="shopping">
     <div class="search-bar">
-        <form action="./search.php" method="GET"> 
+        <form action="web/search.php" method="GET"> 
             <input type="text" name="s" placeholder="搜尋...">
             <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
         </form>
@@ -152,7 +152,7 @@ include("./conn/connMysqlObj.php");
             <div class="product">
                 <?php foreach($products as $product){?>
                 <form class="product-box" action="./web/addcart.php" method="post">
-                    <a href='./web/detail.php?id=<?php echo $product['id'] ?>'><img src="<?php echo $product['picture']?>" class="product-img"></a>
+                    <a href='./web/detail.php?id=<?php echo $product['id'] ?>'><img src="./images/upload/<?php echo $product['picture']?>" class="product-img"></a>
                     <h2 class="product-title"><?php echo $product['bookname']?></h2>
                     <span class="price">$<?php echo $product['price']?></span>
                     <ion-icon name="bag-handle-outline" class="add-cart" onclick="this.parentNode.submit()"><i class="fa-solid fa-cart-shopping"></i></ion-icon>
@@ -160,6 +160,7 @@ include("./conn/connMysqlObj.php");
                     <input type="hidden" value="1" name="quantity">
                     <input type="hidden" value="<?php echo $product['bookname']?>" name="bookname">
                     <input type="hidden" value="<?php echo $product['price']?>" name="price">
+                    <input type="hidden" value="<?php echo $product['picture']?>" name="picture">
                 </form> 
                 <?php }?>  
             </div>

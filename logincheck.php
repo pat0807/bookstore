@@ -22,7 +22,6 @@
 		$_SESSION['level'] = $row['level'];
 		$_SESSION['id'] = $row['id'];
 
-
 		header("location:./?method=messagep&message=Login Success");
 	}else{
 		header("location:./?method=message&message=Login Failed");

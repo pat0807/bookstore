@@ -38,7 +38,7 @@ $product = $stmt->fetch(PDO::FETCH_ASSOC);
         <div class="product__photo">
         <div class="photo-container">
         <div class="photo-main">
-            <img src="<?php echo $product['picture']?>" alt="<?php echo $product['bookname']?>">
+            <img src="../images/upload/<?php echo $product['picture']?>" alt="<?php echo $product['bookname']?>">
         </div>
         </div>
         </div>
