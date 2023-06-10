@@ -118,6 +118,64 @@ if(isset($_SESSION['level']) && $_SESSION['level'] <3){
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link rel="stylesheet" href="../css/style.css">
 <title>二手書交易系統</title>
+<style>
+    table{
+      border-collapse: collapse;
+      border: none;
+      width: 60%;
+      text-align: center;
+      font-size: 18px;
+    }
+
+    th,td{
+      font-family: 'Times New Roman', Times, serif;
+      background: rgba(0, 0, 0, 0.5);
+    }
+
+    td input{
+      background: rgba(255, 255, 255, 0.3);
+      flex: 1;
+      border: 0;
+      outline: none;
+      font-size: 18px;
+      color: #cac7ff;
+      border-radius: 5px;
+      margin: 5px;
+      padding: 5px;
+    }
+
+    #sort{
+      width: 230px;
+      cursor: pointer;
+      appearance: none;
+      outline: 0;
+      box-shadow: none;
+      background: rgba(255, 255, 255, 0.3);
+      border: 0;
+      font-size: 18px;
+      color: #cac7ff;
+      text-align: left;
+      padding: 5px;
+      margin: 5px;
+    }
+
+    #button,#button2{
+      border: none; 
+      background-color:red;
+      color: white;
+      border-radius: 5px;
+      font-size: 15px;
+      cursor: pointer;
+      margin: 10px;
+      padding: 5px;
+    }
+
+    #button:hover,#button2:hover{
+      background-color:orangered;
+      transition: all 0.5s;
+      border: 2px solid red;
+    }
+</style>
 </head>
 <body>
 

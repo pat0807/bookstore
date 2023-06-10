@@ -71,6 +71,11 @@ include("./conn/connMysqlObj.php");
                 echo '<li><a href="./web/add.php">新增商品</a></li>';
             }
             ?>
+            <?php 
+            if(isset($_SESSION['level']) && $_SESSION['level'] >=3){
+                echo '<li><a href="./web/orderlist.php">訂單管理</a></li>';
+            }
+            ?>
         <?php
         if(isset($_SESSION['account'])){
         ?>

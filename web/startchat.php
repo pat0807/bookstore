@@ -1,12 +1,13 @@
 <?php
     session_start();
-    include("../conn/connect.php");
+    include("/Applications/XAMPP/xamppfiles/htdocs/dashboard/2ndbstore/conn/connect.php");
     include("links.php");
+    $connect=mysqli_connect("localhost","root","12345678","system(2)"); 
 
-    if(isset($_SESSION["nameid"]))
+    if(isset($_SESSION["account"]))
     {
-        $nameid = $_SESSION["nameid"];
-        $name = mysqli_query($connect, "SELECT * FROM memberdata WHERE id = '".$nameid."'")
+        $account = $_SESSION["account"];
+        $name = mysqli_query($connect, "SELECT * FROM memberdata WHERE account = '".$account."'")
             or die("Failed to query the database: ".mysqli_error($connect));
         $name = mysqli_fetch_assoc($name);
         
@@ -31,7 +32,7 @@
             </div>
             <div class="modal-body">
                 <?php if(isset($_SESSION["name"])): ?>
-                    <p><a href="startchat.php?nameid=<?php echo $_SESSION["nameid"]; ?>"><?php echo $_SESSION["name"]; ?></a></p>
+                    <p><a href="startchat.php?account=<?php echo $_SESSION["account"]; ?>"><?php echo $_SESSION["name"]; ?></a></p>
                 <?php else: ?>
                     <p>No account logged in.</p>
                 <?php endif; ?>

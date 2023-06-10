@@ -25,6 +25,37 @@ if(isset($_SESSION['level']) && $_SESSION['level'] <3){
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link rel="stylesheet" href="../css/style.css">
 <title>二手書交易系統</title>
+<style>
+    table{
+      border-collapse: collapse;
+      border: none;
+      width: 80%;
+      text-align: center;
+      font-size: 18px;
+    }
+
+    th,td{
+      font-family: 'Times New Roman', Times, serif;
+      background: rgba(0, 0, 0, 0.5);
+    }
+
+    #button{
+      border: none; 
+      background-color:red;
+      color: white;
+      border-radius: 5px;
+      font-size: 15px;
+      cursor: pointer;
+      margin: 10px;
+      padding: 5px;
+    }
+
+    #button:hover{
+      background-color:orangered;
+      transition: all 0.5s;
+      border: 2px solid red;
+    }
+</style>
 </head>
 <body>
 

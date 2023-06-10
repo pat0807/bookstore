@@ -51,7 +51,7 @@ $total = 0;
         <div class="total-title">Total</div>
         <div class="total-price">$<?php echo $total ?></div>
     </div>
-    <button type="button" class="buy-btn">立刻下單</button>
+    <button type="button" class="buy-btn"><a href="./web/checkout.php">立刻下單</button>
     <ion-icon name="close" id="close-cart"></ion-icon>
 </div>
 

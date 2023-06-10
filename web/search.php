@@ -23,6 +23,38 @@ include("../conn/connMysqlObj.php");
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="../css/style.css">
     <title>線上二手書局</title>
+
+<style>
+    table{
+      border-collapse: collapse;
+      border: none;
+      width: 80%;
+      text-align: center;
+      font-size: 18px;
+    }
+
+    th,td{
+      font-family: 'Times New Roman', Times, serif;
+      background: rgba(0, 0, 0, 0.5);
+    }
+
+    #button{
+      border: none; 
+      background-color:red;
+      color: white;
+      border-radius: 5px;
+      font-size: 15px;
+      cursor: pointer;
+      margin: 10px;
+      padding: 5px;
+    }
+
+    #button:hover{
+      background-color:orangered;
+      transition: all 0.5s;
+      border: 2px solid red;
+    }
+</style>
     <link rel="stylesheet" href="../css/search.css">
 </head>
 

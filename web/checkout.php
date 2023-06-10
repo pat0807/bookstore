@@ -492,27 +492,21 @@ $total = 0;
                     <div class="product-card">
                         <div class="card">
                             <div class="img-box">
-                                <img src="<?php echo $cart_item['bookname']?>" alt="<?php echo $cart_item['bookname']?>" class="product-img" width="80px">
+                                <img src="../images/upload/<?php echo $cart_item['picture']?>" alt="<?php echo $cart_item['bookname']?>" class="product-img" width="80px">
                             </div>
 
                             <div class="datail">
                                 <h4 product-name><?php echo $cart_item['bookname']?></h4>
                                 <div class="wrapper">
                                     <div class="product-qty">
-                                        <button id="decrement">
-                                            <ion-icon name="remove-outline"></ion-icon>
-                                        </button>
-                                        <span id="quantity"><?php echo $cart_item['quantity']?></span>
-                                        <button id="increment">
-                                            <ion-icon name="add-outline"></ion-icon>
-                                        </button>
+                                        <span id="quantity">*<?php echo $cart_item['quantity']?></span>
                                     </div>
                                     <div class="price">
                                         $ <span id="price"><?php echo $cart_item['price']?></span>
                                     </div>
                                 </div>
                             </div>
-                            <button class="product-close-btn">
+                            <button class="product-close-btn" onclick="window.location.href='removecart.php?cartid=<?php echo $cart_item['id']?>'">
                                 <ion-icon name="close-outline"></ion-icon>
                             </button>
 

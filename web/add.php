@@ -14,7 +14,7 @@ if(isset($_FILES["picture"])&&($_POST["action"]=="add")){
   $author = $_POST['author'];
   $price = $_POST['price'];
   
-  $file      = $_FILES['picture'];       //上傳檔案信息
+  $file      = $_FILES['picture'];           //上傳檔案信息
   $file_name = $file['name'];                //上傳檔案的原來檔案名稱
   $file_type = $file['type'];                //上傳檔案的類型(副檔名)
   $tmp_name  = $file['tmp_name'];            //上傳到暫存空間的路徑/檔名

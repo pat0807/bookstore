@@ -1,13 +1,13 @@
 <?php
     session_start();
-    include("../conn/connect.php");
+    include("/Applications/XAMPP/xamppfiles/htdocs/dashboard/2ndbstore/conn/connect.php");
     include("links.php");
-    $connect=mysqli_connect("localhost","root","","system"); 
-    
-    if (isset($_SESSION['id']) && $_SESSION['id'] !== "") {
-        $nameid = $_SESSION['id'];
+    $connect=mysqli_connect("localhost","root","12345678","system(2)"); 
+
+    if (isset($_SESSION['account']) && $_SESSION['account'] !== "") {
+        $account = $_SESSION['account'];
         
-        $name = mysqli_query($connect, "SELECT * FROM memberdata WHERE id = '".$nameid."'")
+        $name = mysqli_query($connect, "SELECT * FROM memberdata WHERE account = '".$account."'")
             or die("Failed to query the database: ".mysqli_error($connect));
         $name = mysqli_fetch_assoc($name);
     ?>
@@ -24,21 +24,31 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-4">
-                <p>Hi <?php echo $name["name"]; ?></p>
+                <p>Hi <?php echo $name["account"]; ?></p>
                 <input type="text" id="fromUser" value=<?php echo $name['id']; ?> hidden />
 
                 <p>Send Message to :</p>
                 <ul>
                     <?php
-                        $msgs= mysqli_query($connect, "SELECT * FROM memberdata")
-                            or die("Failed to query database");
-                            while($msg = mysqli_fetch_assoc($msgs))
-                            {
-                                echo '<li><a href="?toUser='.$msg["id"].'">'.$msg["name"].'</a></li>';
+
+                        if ($name['level'] == 3){
+                            $msgs= mysqli_query($connect, "SELECT * FROM memberdata WHERE account != '$account'")
+                                or die("Failed to query database".mysqli_error($connect));
+                                while($msg = mysqli_fetch_assoc($msgs))
+                                {
+                                    echo '<li><a href="?toUser='.$msg["id"].'">'.$msg["account"].'</a></li>';
+                                }
+                        }else{
+                            $msgs= mysqli_query($connect, "SELECT * FROM memberdata WHERE level=3")
+                                or die("Failed to query database".mysqli_error($connect));
+                                while($msg = mysqli_fetch_assoc($msgs))
+                                {
+                                    echo '<li><a href="?toUser='.$msg["id"].'">'.$msg["account"].'</a></li>';
+                                }
                             }
                         ?>
                 </ul>
-                <a href="index.php"><-- Back</a>
+                <a href="../index.php"><-- Back</a>
             </div>
             <div class="col-md-4">
                 <div class="modal-dialog">
@@ -48,17 +58,17 @@
                             <?php
                                 if (isset($_GET["toUser"])) {
                                     $userName = mysqli_query($connect, "SELECT * FROM memberdata WHERE id = '" . $_GET["toUser"] . "' ")
-                                        or die("Failed to query database" );
+                                        or die("Failed to query database" . mysqli_error($connect));
                                     $uName = mysqli_fetch_assoc($userName);
                                     echo '<input type="text" value=' . $_GET["toUser"] . ' id="toUser" hidden/>';
-                                    echo $uName["name"] . ' <button class="delete-btn" data-id="' . $_GET["toUser"] . '">Delete</button>';
+                                    echo $uName["account"] . ' <button class="delete-btn" data-id="' . $_GET["toUser"] . '">Delete</button>';
                                 } else {
                                     $userName = mysqli_query($connect, "SELECT * FROM memberdata")
-                                        or die("Failed to query database" );
+                                        or die("Failed to query database" . mysqli_error($connect));
                                     $uName = mysqli_fetch_assoc($userName);
                                     $_SESSION["toUser"] = $uName["id"];
-                                    echo '<input type="text" value=' . $_SESSION["toUser"] . ' id="toUser" hidden/>';
-                                    echo $uName["name"] . ' <button class="delete-btn" data-id="' . $_SESSION["toUser"] . '">Delete</button>';
+                                    '<input type="text" value=' . $_SESSION["toUser"] . ' id="toUser" hidden/>';
+                                    echo "Please Choose Who to Message";
                                 }
                                 ?>
                              </h4>
@@ -66,20 +76,20 @@
                         <div class="modal-body" id="msgBody" style="height:400px; overflow-y: scroll; overflow-x: hidden;">
                             <?php
                                 if(isset($_GET["toUser"])) 
-                                    $chats = mysqli_query($connect, "SELECT * FROM messages where (FromUser = '".$_SESSION["id"]."' AND
-                                        ToUser = '".$_GET["toUser"]."') OR (FromUser = '".$_GET["toUser"]."' AND ToUser = '".$_SESSION["id"]
+                                    $chats = mysqli_query($connect, "SELECT * FROM messages where (FromUser = '".$_SESSION["account"]."' AND
+                                        ToUser = '".$_GET["toUser"]."') OR (FromUser = '".$_GET["toUser"]."' AND ToUser = '".$_SESSION["account"]
                                         ."')")
-                                    or die("Failed to query database");
+                                    or die("Failed to query database".mysqli_error($connect));
                                 else
-                                    $chats = mysqli_query($connect, "SELECT * FROM messages where (FromUser = '".$_SESSION["id"]."' AND
-                                        ToUser = '".$_SESSION["toUser"]."') OR (FromUser = '".$_SESSION["toUser"]."' AND ToUser = '".$_SESSION["id"]
+                                    $chats = mysqli_query($connect, "SELECT * FROM messages where (FromUser = '".$_SESSION["account"]."' AND
+                                        ToUser = '".$_SESSION["toUser"]."') OR (FromUser = '".$_SESSION["toUser"]."' AND ToUser = '".$_SESSION["account"]
                                         ."')")
-                                    or die("Failed to query database");
+                                    or die("Failed to query database".mysqli_error($connect));
 
 
                                     while($chat = mysqli_fetch_assoc($chats))
                                     {
-                                        if($chat["FromUser"] == $_SESSION["id"])
+                                        if($chat["FromUser"] == $_SESSION["account"])
                                             echo "<div style= 'text-align:right;'>
                                                     <p style= 'background-color:lightblue; word-wrap:break-word; display:inline-block;
                                                         padding:5px; border-radius:10px; max-width:70%;'>
@@ -122,25 +132,23 @@
     ?>
 </body>
 <script type="text/javascript">
-    $(document).ready(function(){
-        $("#send").on("click",function(){
+    $(document).ready(function() {
+        $("#send").on("click", function() {
             $.ajax({
-                url:"insertMessage.php",
-                method:"POST",
-                data:{
+                url: "insertMessage.php",
+                method: "POST",
+                data: {
                     fromUser: $("#fromUser").val(),
                     toUser: $("#toUser").val(),
                     message: $("#message").val()
                 },
-                dateType:"text",
-                success:function(data)
-                {
+                dataType: "text",
+                success: function(data) {
                     $("#message").val("");
                 }
             });
         });
 
-        $(document).ready(function() {
         $(".delete-btn").on("click", function() {
             var userId = $(this).data("id");
             if (confirm("Are you sure you want to delete the chat with this user?")) {
@@ -152,24 +160,22 @@
                     },
                     dataType: "text",
                     success: function(data) {
-                        // Handle the success response, such as removing the chat from the UI or showing a success message
+                        alert(data); // Display the success message or handle the response accordingly
                     }
                 });
             }
         });
-    });
 
-        setInterval(function(){
+        setInterval(function() {
             $.ajax({
-                url:"realTimeChat.php",
-                method:"POST",
-                data:{
-                    fromUser:$('#fromUser').val(),
-                    toUser:$('#toUser').val()
+                url: "realTimeChat.php",
+                method: "POST",
+                data: {
+                    fromUser: $('#fromUser').val(),
+                    toUser: $('#toUser').val()
                 },
-                dataType:"text",
-                success:function(data)
-                {
+                dataType: "text",
+                success: function(data) {
                     $("#msgBody").html(data);
                 }
             });
@@ -177,4 +183,3 @@
     });
 </script>
 </html>
-
