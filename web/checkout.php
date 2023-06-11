@@ -1,9 +1,14 @@
 <?php
+session_start();
+if(isset($_SESSION['account']) && $_SESSION['account'] != ""){
 if(isset($_COOKIE['cart_items'])){
     $cart_items = json_decode($_COOKIE['cart_items'],true);
 }else{
     $cart_items = [];
 }
+//改的
+require_once("../conn/connect.php");
+//include("../web/cart.php");
 $total = 0;
 ?>
 
@@ -444,28 +449,28 @@ $total = 0;
                     </div>
                         <div class="cardholder-name">
                             <label for="cardholder-name" class="label-default">持卡人姓名</label>
-                            <input type="text" name="cardholder-name" id="cardholder-name" class="input-default">
+                            <input type="text" name="cardholder-name" id="cardholder-name" class="input-default" required>
                         </div>
 
                         <div class="card-number">
                             <label for="card-number" class="label-default">卡號</label>
-                            <input type="number" name="card-number" id="card-number" class="input-default">
+                            <input type="text" name="card-number" id="card-number" class="input-default" required>
                         </div>
 
                         <div class="input-flex">
                             <div class="expire-date">
                                 <label for="expire-date" class="label-default">有效期限</label>
                                 <div class="input-flex">
-                                    <input type="number" name="day" id="expire-date" placeholder="31" min="1" max="31" class="input-default">
+                                    <input type="text" name="day" id="expire-date" placeholder="31" min="1" max="31" class="input-default" required>
                                     /
-                                    <input type="number" name="month" id="expire-date" placeholder="12" min="1" max="12" class="input-default">
+                                    <input type="text" name="month" id="expire-date" placeholder="12" min="1" max="12" class="input-default" required>
 
                                 </div>
                             </div>
 
                             <div class="cvv">
-                                <label for="cvv" class="label-default">安全碼</label>
-                                <input type="number" name="cvv" id="cvv" class="input-default">
+                                <label for="cvv" class="label-default" required>安全碼</label>
+                                <input type="text" name="cvv" id="cvv" class="input-default">
                             </div>
                         </div>
 
@@ -499,24 +504,29 @@ $total = 0;
                                 <h4 product-name><?php echo $cart_item['bookname']?></h4>
                                 <div class="wrapper">
                                     <div class="product-qty">
-                                        <span id="quantity">*<?php echo $cart_item['quantity']?></span>
+                                        <button id="decrement">
+                                            <ion-icon name="remove-outline"></ion-icon>
+                                        </button>
+                                        <span id="quantity"><?php echo $cart_item['quantity']?></span>
+                                        <button id="increment">
+                                            <ion-icon name="add-outline"></ion-icon>
+                                        </button>
                                     </div>
                                     <div class="price">
-                                        $ <span id="price"><?php echo $cart_item['price']?></span>
+                                        $ <span id="price"><?php echo $cart_item['price'] * $cart_item['quantity']?></span>
                                     </div>
                                 </div>
                             </div>
-                            <button class="product-close-btn" onclick="window.location.href='removecart.php?cartid=<?php echo $cart_item['id']?>'">
-                                <ion-icon name="close-outline"></ion-icon>
-                            </button>
+                            
+                                
 
                         </div>
 
                     </div>
 
-                    <button class="product-close-btn">
+                    <a href="../index.php"><button class="product-close-btn">
                         <ion-icon name="close-outline"></ion-icon>
-                    </button>
+                    </button></a>
                     <?php }?>        
                 </div>
 
@@ -557,7 +567,7 @@ $total = 0;
 
 
 
-
+    
 
 
 
@@ -617,3 +627,6 @@ $total = 0;
 </body>
 
 </html>
+    <?php }else{
+        header("location: ../login.php");
+    }?>

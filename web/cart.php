@@ -15,7 +15,7 @@ $total = 0;
 </style>
 <div class="cart" id="cartui">
     <i class="fa-solid fa-circle-xmark" id="cartClose"></i>
-    <h2>YOUR CART</h2>
+    <h2>Your cart</h2>
     <div class="cart-content">
         <?php foreach($cart_items as $cart_item){
             $total += $cart_item["price"] * $cart_item["quantity"];
@@ -36,6 +36,7 @@ $total = 0;
                     <!-- <button onclick="removecartnumber(<?php echo $cart_item['id']?>)">-</button> -->
                     <!-- <input type="number"  value="<?php echo $cart_item['quantity']?>" disabled/> -->
                     <!-- <button onclick="addcartnumber(<?php echo $cart_item['id']?>)">+</button> -->
+                    
                 </label>
             </div>
             <?php if(isset($ishome) && $ishome){
@@ -51,7 +52,7 @@ $total = 0;
         <div class="total-title">Total</div>
         <div class="total-price">$<?php echo $total ?></div>
     </div>
-    <button type="button" class="buy-btn"><a href="./web/checkout.php">立刻下單</button>
+    <input type="button" class="buy-btn" name="button" id="button" value="前往結帳" onClick="location.href='web/checkout.php';">
     <ion-icon name="close" id="close-cart"></ion-icon>
 </div>
 

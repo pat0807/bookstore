@@ -28,7 +28,11 @@ VALUES (:memberid, :cardholderName , :cardNumber, :day, :month , :cvv,:inform, :
     $stmt->bindParam(':ordertime',$ordertime); //綁定變數
 
     $stmt->execute(); //執行SQL
-
+    if(isset($_COOKIE['cart_items'])){
+        $cart_items = json_decode($_COOKIE['cart_items'],true);
+        $cart_items = [];
+        setcookie('cart_items',json_encode($cart_items),time() + 3600,'/');
+    }
     header("location:./paysuccess.php");
 
 ?>

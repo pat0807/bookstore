@@ -2,7 +2,7 @@
 session_start();
 
 if(isset($_SESSION['name']) === false){
-    header("Location: login.php");
+    header("Location: ../login.php");
 }
 
 ?>
@@ -15,7 +15,7 @@ if(isset($_SESSION['name']) === false){
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/style.css">
-    <title>Register</title>
+    <title>線上二手書局</title>
 </head>
 <body>
 <header id="header">
@@ -29,6 +29,12 @@ if(isset($_SESSION['name']) === false){
             <form method="post" action="updatemember.php" id="form">
                   <input type=hidden name="dbaction" value="register">
                     <h2>會員中心</h2>
+                    <?php 
+                    if($_SESSION['level'] <=2){
+                        echo '*若要成為賣家，請填完整資料';
+                    }
+                    ?>
+                    
                     <div class="inputbox">
                         <ion-icon name="person-outline"></ion-icon>
                         <input type="user" name="name" value="<?php echo $_SESSION['name']?>">
@@ -51,7 +57,7 @@ if(isset($_SESSION['name']) === false){
                     </div>
                     <a href="">更改密碼</a>
                     <button class="register_btn" type="submit">確認修改</button>
-
+                    
                 </form>
             </div>
         </div>

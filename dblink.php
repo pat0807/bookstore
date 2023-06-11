@@ -1,13 +1,13 @@
 <?php
 
-include_once('../conn/connect.php');
+include_once('./conn/connect.php');
     use PHPMailer\PHPMailer\SMTP;
     use PHPMailer\PHPMailer\PHPMailer;
     use PHPMailer\PHPMailer\Exception;
 
-    require 'phpmailer/src/Exception.php';
-    require 'phpmailer/src/PHPMailer.php';
-    require 'phpmailer/src/SMTP.php';
+    require 'web/phpmailer/src/Exception.php';
+    require 'web/phpmailer/src/PHPMailer.php';
+    require 'web/phpmailer/src/SMTP.php';
 
     $dbaction = $_POST['dbaction'];
     $account = $_POST['account'];
@@ -29,16 +29,16 @@ include_once('../conn/connect.php');
     $member = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     if(count($member) >=1){
-      header("location:../index.php?method=message&message=已有相同帳號，請更換帳號");
+      header("location:./index.php?method=message&message=已有相同帳號或信箱，請更換帳號或信箱");
     }
 
     for ($i = 0; $i < $tokenLength; $i++) {
         $token .= $charset[rand(0, $charsetLength - 1)];
     }
     if($password != $confirm_password){
-      header("location:../index.php?method=message&message=請輸入相同密碼");
+      header("location:./index.php?method=message&message=請輸入相同密碼");
     }elseif(count($member) >=1){
-        header("location:../index.php?method=message&message=已有相同帳號，請更換帳號");
+        header("location:./index.php?method=message&message=已有相同帳號或信箱，請更換帳號或信箱");
       }
     else{
       $link = mysqli_connect('localhost','root','','system');
@@ -67,7 +67,7 @@ include_once('../conn/connect.php');
             $mail->isHTML(true);
   
             $mail->Subject = 'please sign up ';
-            $url = 'http://localhost/系統分析/2ndbstore/web/login.php?account='.$_POST['account'].'&token='.$token;
+            $url = 'http://localhost/系統分析/2ndbstore/login.php?account='.$_POST['account'].'&token='.$token;
             $mail->Body = "認證網址 <a href='$url'>$url</a>" ;
   
             $mail->send();

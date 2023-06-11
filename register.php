@@ -1,3 +1,10 @@
+<?php 
+session_start();
+if(isset($_SESSION['name']) === true){
+    header("Location: ./index.php");
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,7 +12,23 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/style.css">
-    <title>Register</title>
+    <title>線上二手書局</title>
+    <style> 
+    .register_btn{ 
+        width: 100%; 
+        height: 40px; 
+        border-radius: 40px; 
+        background: #fff; 
+        border: none; 
+        outline: none; 
+        cursor: pointer; 
+        font-size: 1em; 
+        font-weight: 600; 
+    } 
+    .register{ 
+        margin-top: -5px; 
+    } 
+</style>
 </head>
 <body>
 <header id="header">
@@ -39,6 +62,8 @@
                         <input type="password" name="confirm_password"required>
                         <label for="">確認密碼</label>
                     </div>
+                    
+                    
                     <div class="forget">
                         <label for=""><input type="checkbox">已了解相關<a href="#">使用條款</a></label>
                     </div>

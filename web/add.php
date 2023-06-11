@@ -2,7 +2,8 @@
 if(isset($_SESSION['level']) && $_SESSION['level'] <3){
   header("Location: home.php");
 }
-
+session_start();
+$account = $_SESSION["account"];
 if(isset($_FILES["picture"])&&($_POST["action"]=="add")){
 	include("../conn/connect.php");
   
@@ -23,7 +24,7 @@ if(isset($_FILES["picture"])&&($_POST["action"]=="add")){
   $imgsrc = $rand.$file_name;
 
  
-  $sql_str = "INSERT INTO product (bookname,sort,description,author,price,picture) VALUES (:bookname,:sort,:description,:author,:price,:picture)";
+  $sql_str = "INSERT INTO product (bookname,sort,description,author,price,picture,account) VALUES (:bookname,:sort,:description,:author,:price,:picture,:account)";
   $stmt = $conn -> prepare($sql_str);
   
   $stmt -> bindParam(':bookname' ,$bookname);
@@ -32,6 +33,7 @@ if(isset($_FILES["picture"])&&($_POST["action"]=="add")){
   $stmt -> bindParam(':author' ,$author);
   $stmt -> bindParam(':price' ,$price);
   $stmt -> bindParam(':picture' ,$imgsrc);
+  $stmt -> bindParam(':account' ,$account);
   $stmt ->execute();
 
 
@@ -77,6 +79,8 @@ if(isset($_FILES["picture"])&&($_POST["action"]=="add")){
 <link rel="stylesheet" href="../css/style.css">
 
 
+
+
 </head>
 <body>
 
@@ -93,7 +97,7 @@ if(isset($_FILES["picture"])&&($_POST["action"]=="add")){
     
     <tr>
       <td><font color="white">分類</font></td><td>
-        <select name="sort" id="sort">
+        <select name="sort" id="sort" required>
           <option value="" selected disabled>請選擇分類</option>
           <option value="1">文史哲類</option>
           <option value="2">外語類</option>

@@ -46,7 +46,7 @@ if (isset($_GET["id"])) {
         opacity: 1;
         box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.5);
     }
-    </style>
+</style>
 </head>
 <body>
     <header id="header">
@@ -75,20 +75,25 @@ if (isset($_GET["id"])) {
         <div class="description">
             <h3>INFORMATION</h3>
             <div class="賣家">
+                賣家 <span><a href="chatbox2.php?account=<?php echo $product['account']; ?>&toUser=1">
+                        <?php echo $product['account']; ?>
+                    </a>
+                    </span>
             </div>
             <ul>
                 <li><?php echo $product['description']; ?></li>
             </ul>
         </div>
         <form class="product-box" action="./addcart.php" method="post">
-        <button class="buy--btn" type="submit">ADD TO CART</button>
+        <button class="buy--btn" type="submit">加入購物車</button>
             <input type="hidden" value="<?php echo $product['id'] ?>" name="id" >
             <input type="hidden" value="1" name="quantity">
             <input type="hidden" value="<?php echo $product['bookname']?>" name="bookname">
             <input type="hidden" value="<?php echo $product['price']?>" name="price">
             <input type="hidden" value="<?php echo $product['picture']?>" name="picture">
+        </form>
         </div>
-        </form> 
+
        </section>
     </header>
         

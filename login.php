@@ -1,4 +1,8 @@
 <?php 
+session_start();
+if(isset($_SESSION['name']) === true){
+    header("Location: ./index.php");
+}
 include_once('./conn/connect.php');
 if(isset($_GET['token'])){
     $token = $_GET['token'];

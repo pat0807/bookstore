@@ -31,10 +31,27 @@
             </li>
             <li><a href="./member.php">會員中心</a></li>
             <?php 
-            if(isset($_SESSION['level']) && $_SESSION['level'] >=3){
-                echo '<li><a href="./add.php">新增商品</a></li>';
-            }
+                if(isset($_SESSION['level']) && $_SESSION['level'] >=3){
+                    echo '<li><a href="./add.php">新增商品</a></li>';
+                }
             ?>
+            <?php 
+                if(isset($_SESSION['level']) && $_SESSION['level'] >=2){
+                    echo '<li><a href="./orderlist.php">訂單管理</a></li>';
+                }
+            ?>
+            <?php
+                if(isset($_SESSION['account'])) 
+                {
+                ?>
+                <li><a href="./startchat.php">私訊</a></li>
+            <?php
+                }else{
+                ?>
+                <li><a href="./nochat.php">私訊</a></li>
+            <?php
+                }
+                ?>
             
         <?php
         if(isset($_SESSION['account'])){

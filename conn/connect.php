@@ -27,4 +27,5 @@ catch ( PDOException $e ){
 } 
  
 //$conn = null; //關閉資料庫的連線
+date_default_timezone_set('Asia/Taipei');
 ?>

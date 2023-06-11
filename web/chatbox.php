@@ -1,8 +1,8 @@
 <?php
     session_start();
-    include("/Applications/XAMPP/xamppfiles/htdocs/dashboard/2ndbstore/conn/connect.php");
+    include("../conn/connect.php");
     include("links.php");
-    $connect=mysqli_connect("localhost","root","12345678","system(2)"); 
+    $connect=mysqli_connect("localhost","root","","system"); 
 
     if (isset($_SESSION['account']) && $_SESSION['account'] !== "") {
         $account = $_SESSION['account'];
@@ -31,7 +31,7 @@
                 <ul>
                     <?php
 
-                        if ($name['level'] == 3){
+                        if ($name['level'] >= 3){
                             $msgs= mysqli_query($connect, "SELECT * FROM memberdata WHERE account != '$account'")
                                 or die("Failed to query database".mysqli_error($connect));
                                 while($msg = mysqli_fetch_assoc($msgs))

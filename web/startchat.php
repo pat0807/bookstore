@@ -1,8 +1,8 @@
 <?php
     session_start();
-    include("/Applications/XAMPP/xamppfiles/htdocs/dashboard/2ndbstore/conn/connect.php");
+    include("../conn/connect.php");
     include("links.php");
-    $connect=mysqli_connect("localhost","root","12345678","system(2)"); 
+    $connect=mysqli_connect("localhost","root","","system"); 
 
     if(isset($_SESSION["account"]))
     {

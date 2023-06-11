@@ -72,10 +72,22 @@ include("./conn/connMysqlObj.php");
             }
             ?>
             <?php 
-            if(isset($_SESSION['level']) && $_SESSION['level'] >=3){
+            if(isset($_SESSION['level']) && $_SESSION['level'] >=2){
                 echo '<li><a href="./web/orderlist.php">訂單管理</a></li>';
             }
             ?>
+            <?php
+                    if(isset($_SESSION['account'])) 
+                    {
+                ?>
+                <li><a href="./web/startchat.php">私訊</a></li>
+                <?php
+                    }else{
+                    ?>
+                <li><a href="./web/nochat.php">私訊</a></li>
+                <?php
+                    }
+                    ?>
         <?php
         if(isset($_SESSION['account'])){
         ?>

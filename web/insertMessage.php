@@ -1,6 +1,6 @@
 <?php
     session_start();
-    $connect=mysqli_connect("localhost","root","12345678","system(2)"); 
+    $connect=mysqli_connect("localhost","root","","system"); 
 
     $fromUser= $_POST["fromUser"];
     $toUser= $_POST["toUser"];
