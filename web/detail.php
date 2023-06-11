@@ -25,7 +25,8 @@ if (isset($_GET["id"])) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>線上二手書局</title>
+    <title>Document</title>
+
     <style>
     .product{
         gap: 50px;
@@ -47,6 +48,8 @@ if (isset($_GET["id"])) {
         box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.5);
     }
 </style>
+
+
 </head>
 <body>
     <header id="header">
@@ -75,7 +78,7 @@ if (isset($_GET["id"])) {
         <div class="description">
             <h3>INFORMATION</h3>
             <div class="賣家">
-                賣家 <span><a href="chatbox2.php?account=<?php echo $product['account']; ?>&toUser=1">
+                賣家 <span><a href="chatbox2.php?account=<?php echo $product['account']; ?>&toUser=<?php echo $product['id']; ?>">
                         <?php echo $product['account']; ?>
                     </a>
                     </span>

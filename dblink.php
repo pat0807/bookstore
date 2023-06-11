@@ -30,6 +30,7 @@ include_once('./conn/connect.php');
 
     if(count($member) >=1){
       header("location:./index.php?method=message&message=已有相同帳號或信箱，請更換帳號或信箱");
+      exit();
     }
 
     for ($i = 0; $i < $tokenLength; $i++) {
@@ -37,8 +38,10 @@ include_once('./conn/connect.php');
     }
     if($password != $confirm_password){
       header("location:./index.php?method=message&message=請輸入相同密碼");
+      exit();
     }elseif(count($member) >=1){
         header("location:./index.php?method=message&message=已有相同帳號或信箱，請更換帳號或信箱");
+        exit();
       }
     else{
       $link = mysqli_connect('localhost','root','','system');
@@ -78,11 +81,11 @@ include_once('./conn/connect.php');
           
 
            //echo "新增成功"; 轉址
-        //  header("location:index.php?method=message&message=註冊成功");
+         header("location:index.php?method=message&message=註冊成功");
          }
        else
          {
-           //echo "新增失敗";
+
          header("location:index.php?method=message&message=註冊失敗,資料庫錯誤");
          }
       }

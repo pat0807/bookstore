@@ -1,37 +1,40 @@
-<?php 
+<?php
 session_start();
-if(isset($_SESSION['name']) === true){
+if (isset($_SESSION['name']) === true) {
     header("Location: ./index.php");
 }
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/style.css">
     <title>線上二手書局</title>
-    <style> 
-    .register_btn{ 
-        width: 100%; 
-        height: 40px; 
-        border-radius: 40px; 
-        background: #fff; 
-        border: none; 
-        outline: none; 
-        cursor: pointer; 
-        font-size: 1em; 
-        font-weight: 600; 
-    } 
-    .register{ 
-        margin-top: -5px; 
-    } 
-</style>
+    <style>
+        .register_btn {
+            width: 100%;
+            height: 40px;
+            border-radius: 40px;
+            background: #fff;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+        }
+
+        .register {
+            margin-top: -5px;
+        }
+    </style>
 </head>
+
 <body>
-<header id="header">
+    <header id="header">
         <div class="logo">
             <h1 class="logo"><a href="./">2nd BS.</a></h1>
         </div>
@@ -39,8 +42,8 @@ if(isset($_SESSION['name']) === true){
     <section>
         <div class="form-box2">
             <div class="form-value">
-            <form method="post" action="dblink.php" id="form">
-                  <input type=hidden name="dbaction" value="register">
+                <form method="post" action="dblink.php" id="form">
+                    <input type=hidden name="dbaction" value="register">
                     <h2>REGISTRATION</h2>
                     <div class="inputbox">
                         <ion-icon name="person-outline"></ion-icon>
@@ -59,11 +62,11 @@ if(isset($_SESSION['name']) === true){
                     </div>
                     <div class="inputbox">
                         <ion-icon name="checkmark-done-outline"></ion-icon>
-                        <input type="password" name="confirm_password"required>
+                        <input type="password" name="confirm_password" required>
                         <label for="">確認密碼</label>
                     </div>
-                    
-                    
+
+
                     <div class="forget">
                         <label for=""><input type="checkbox">已了解相關<a href="#">使用條款</a></label>
                     </div>
@@ -81,4 +84,5 @@ if(isset($_SESSION['name']) === true){
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     <!-- <script src="verify.js"></script> -->
 </body>
+
 </html>

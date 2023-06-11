@@ -56,7 +56,7 @@ if (isset($_SESSION['account']) && $_SESSION['account'] !== "") {
                             $toUser = isset($_GET["toUser"]) ? $_GET["toUser"] : $_SESSION["toUser"];
                             $userNameQuery = mysqli_query($connect, "SELECT * FROM memberdata WHERE id = '" . $toUser . "' ")
                                 or die("Failed to query database" . mysqli_error($connect));
-                            
+                    
                             if (mysqli_num_rows($userNameQuery) > 0) {
                                 $uName = mysqli_fetch_assoc($userNameQuery);
                                 echo '<input type="text" value="' . $toUser . '" id="toUser" hidden/>';
