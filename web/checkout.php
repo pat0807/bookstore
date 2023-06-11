@@ -453,24 +453,24 @@ $total = 0;
                         </div>
 
                         <div class="card-number">
-                            <label for="card-number" class="label-default">卡號</label>
-                            <input type="text" name="card-number" id="card-number" class="input-default" required>
+                            <label for="card-number"  class="label-default">卡號</label>
+                            <input type="text" oninput="formatInput(this)" name="card-number" id="card-number" class="input-default" required>
                         </div>
 
                         <div class="input-flex">
                             <div class="expire-date">
-                                <label for="expire-date" class="label-default">有效期限</label>
+                                <label for="expire-date" class="label-default" >有效期限</label>
                                 <div class="input-flex">
-                                    <input type="text" name="day" id="expire-date" placeholder="31" min="1" max="31" class="input-default" required>
+                                    <input type="text" oninput="validateInputDate(this)" name="day" id="expire-date" placeholder="31" min="1" max="31" class="input-default" required>
                                     /
-                                    <input type="text" name="month" id="expire-date" placeholder="12" min="1" max="12" class="input-default" required>
+                                    <input type="text" oninput="validateInputDate(this)" name="month" id="expire-date" placeholder="12" min="1" max="12" class="input-default" required>
 
                                 </div>
                             </div>
 
                             <div class="cvv">
                                 <label for="cvv" class="label-default" required>安全碼</label>
-                                <input type="text" name="cvv" id="cvv" class="input-default">
+                                <input type="text" name="cvv" id="cvv" oninput="validateInputCvv(this)" class="input-default">
                             </div>
                         </div>
 
@@ -623,6 +623,34 @@ $total = 0;
         }
 
         updateSubtotal();
+    </script>
+
+    <script>
+        function formatInput(input) {
+            var value = input.value.replace(/\D/g, '');
+            
+            var formattedValue = '';
+
+            for (var i = 0; i < value.length; i++) {
+                if (i > 0 && i % 4 === 0) {
+                formattedValue += ' ';
+                }
+                formattedValue += value[i];
+            }
+
+            input.value = formattedValue;
+            input.value = input.value.slice(0, 19); 
+        }
+
+
+        function validateInputDate(input) {
+            input.value = input.value.replace(/\D/g, ''); 
+            input.value = input.value.slice(0, 2); 
+        }
+        function validateInputCvv(input) {
+            input.value = input.value.replace(/\D/g, ''); 
+            input.value = input.value.slice(0, 3); 
+        }
     </script>
 </body>
 
