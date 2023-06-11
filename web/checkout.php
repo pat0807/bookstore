@@ -437,7 +437,7 @@ $total = 0;
         </h1>
         <div class="item-flex">
             <section class="checkout">
-                <form action="addorder.php" method="post">
+                <form action="addorder.php" method="post" id="formPay">
                 <h2 class="section-heading">付款細節</h2>
                 <div class="payment-form">
                     <div class="payment-method">
@@ -461,9 +461,9 @@ $total = 0;
                             <div class="expire-date">
                                 <label for="expire-date" class="label-default" >有效期限</label>
                                 <div class="input-flex">
-                                    <input type="text" oninput="validateInputDate(this)" name="day" id="expire-date" placeholder="31" min="1" max="31" class="input-default" required>
+                                    <input type="text" oninput="validateInputDate(this)" name="day" id="card-day"  placeholder="31" min="1" max="31" class="input-default" required>
                                     /
-                                    <input type="text" oninput="validateInputDate(this)" name="month" id="expire-date" placeholder="12" min="1" max="12" class="input-default" required>
+                                    <input type="text" oninput="validateInputDate(this)" name="month" id="card-month" placeholder="12" min="1" max="12" class="input-default" required>
 
                                 </div>
                             </div>
@@ -482,7 +482,7 @@ $total = 0;
                     }?>
                     <input type="hidden" value="<?php echo $productsinform?>" name="inform">
                     <input type="hidden" value="<?php echo $total?>" name="total">
-                    <button class="btn btn-primary" type="submit">
+                    <button class="btn btn-primary" type="button" id="payBtn">
                     <b>付款</b>
                     </button>
                 </form> 
@@ -626,20 +626,47 @@ $total = 0;
     </script>
 
     <script>
+        const formPay =document.getElementById('formPay')
+        const payBtn =document.getElementById('payBtn')
+        const cardNumber = document.getElementById('card-number')
+        const cardDay = document.getElementById('card-day')
+        const cardMonth = document.getElementById('card-month')
+        const cvv = document.getElementById('cvv')
+
+        payBtn.addEventListener('click', ()=>{
+            if(cardNumber.value.length != 16){
+                alert('卡號須為16碼')
+                return;
+            }
+            if(cardMonth.value > 12 || cardMonth.value < 1){
+                alert("請輸入正確月份")
+                return
+            }
+            if(cardMonth.value==1 || cardMonth.value==3 || cardMonth.value==5 || cardMonth.value==7|| cardMonth.value==8 || cardMonth.value==10|| cardMonth.value==12){
+                if(cardDay.value > 31 || cardDay.value < 1 ){
+                    alert("請輸入正確日期")
+                    return
+                }
+            }else if(cardMonth.value == 2){
+                if(cardDay.value > 28 || cardDay.value < 1 ){
+                    alert("請輸入正確日期")
+                    return
+                }
+            }else{
+                if(cardDay.value > 30 || cardDay.value < 1 ){
+                    alert("請輸入正確日期")
+                    return
+                }
+            }
+            if(cvv.value.length != 3){
+                alert("請輸入正確的CVV格式")
+                return
+            }
+            formPay.submit()
+        })
         function formatInput(input) {
             var value = input.value.replace(/\D/g, '');
-            
-            var formattedValue = '';
-
-            for (var i = 0; i < value.length; i++) {
-                if (i > 0 && i % 4 === 0) {
-                formattedValue += ' ';
-                }
-                formattedValue += value[i];
-            }
-
-            input.value = formattedValue;
-            input.value = input.value.slice(0, 19); 
+            input.value = input.value.slice(0, 16); 
         }
 
 
