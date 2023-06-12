@@ -46,8 +46,8 @@ if (isset($_SESSION['account']) && $_SESSION['account'] !== "") {
                             $msgs = mysqli_query($connect, "SELECT DISTINCT memberdata.id, memberdata.account 
                                                         FROM memberdata 
                                                         INNER JOIN messages ON memberdata.id = messages.FromUser OR memberdata.id = messages.ToUser
-                                                        WHERE (memberdata.level = 3 AND messages.ToUser = '" . $name['id'] . "')
-                                                                OR (memberdata.level = 3 AND messages.FromUser = '" . $name["id"] . "')")
+                                                        WHERE (memberdata.level >= 3 AND messages.ToUser = '" . $name['id'] . "')
+                                                                OR (memberdata.level >= 3 AND messages.FromUser = '" . $name["id"] . "')")
                                 or die("Failed to query database" . mysqli_error($connect));
                             while ($msg = mysqli_fetch_assoc($msgs)) {
                                 echo '<li><a href="?toUser=' . $msg["id"] . '">' . $msg["account"] . '</a></li>';
@@ -70,53 +70,44 @@ if (isset($_SESSION['account']) && $_SESSION['account'] !== "") {
                                         echo '<input type="text" value=' . $_GET["toUser"] . ' id="toUser" hidden/>';
                                         echo $uName["account"] . ' <button class="delete-btn" data-id="' . $_GET["toUser"] . '">Delete</button>';
                                     } else {
-                                        $userName = mysqli_query($connect, "SELECT * FROM memberdata")
-                                            or die("Failed to query database" . mysqli_error($connect));
-                                        $uName = mysqli_fetch_assoc($userName);
-                                        $_SESSION["toUser"] = $uName["id"];
-                                        echo '<input type="" value=' . $_SESSION["toUser"] . ' id="toUser" hidden/>';
                                         echo "Choose Who to Message";
                                     }
                                     ?>
                                 </h4>
                             </div>
-                            <div class="modal-body" id="msgBody" style="height:400px; overflow-y: scroll; overflow-x: hidden;">
-                                <?php
-                                if (isset($_GET["toUser"]))
+                            <?php if (isset($_GET["toUser"])) : ?>
+                                <div class="modal-body" id="msgBody" style="height:400px; overflow-y: scroll; overflow-x: hidden;">
+                                    <?php
                                     $chats = mysqli_query($connect, "SELECT * FROM messages where (FromUser = '" . $_SESSION["account"] . "' AND
                                         ToUser = '" . $_GET["toUser"] . "') OR (FromUser = '" . $_GET["toUser"] . "' AND ToUser = '" . $_SESSION["account"]
                                         . "')")
                                         or die("Failed to query database" . mysqli_error($connect));
-                                else
-                                    $chats = mysqli_query($connect, "SELECT * FROM messages where (FromUser = '" . $_SESSION["account"] . "' AND
-                                        ToUser = '" . $_SESSION["toUser"] . "') OR (FromUser = '" . $_SESSION["toUser"] . "' AND ToUser = '" . $_SESSION["account"]
-                                        . "')")
-                                        or die("Failed to query database" . mysqli_error($connect));
 
-
-                                while ($chat = mysqli_fetch_assoc($chats)) {
-                                    if ($chat["FromUser"] == $_SESSION["account"])
-                                        echo "<div style= 'text-align:right;'>
-                                                    <p style= 'background-color:lightblue; word-wrap:break-word; display:inline-block;
+                                    while ($chat = mysqli_fetch_assoc($chats)) {
+                                        if ($chat["FromUser"] == $_SESSION["account"])
+                                            echo "<div style= 'text-align:right;'>
+                                                        <p style= 'background-color:lightblue; word-wrap:break-word; display:inline-block;
+                                                            padding:5px; border-radius:10px; max-width:70%;'>
+                                                            " . $chat["Message"] . "
+                                                        </p>
+                                                        </div>";
+                                        else
+                                            echo "<div style= 'text-align:left;'>
+                                                    <p style= 'background-color:yellow; word-wrap:break-word; display:inline-block;
                                                         padding:5px; border-radius:10px; max-width:70%;'>
                                                         " . $chat["Message"] . "
                                                     </p>
                                                     </div>";
-                                    else
-                                        echo "<div style= 'text-align:left;'>
-                                                <p style= 'background-color:yellow; word-wrap:break-word; display:inline-block;
-                                                    padding:5px; border-radius:10px; max-width:70%;'>
-                                                    " . $chat["Message"] . "
-                                                </p>
-                                                </div>";
-                                }
-                                ?>
-                            </div>
-                            <div class="modal-footer">
-                                <textarea id="message" class="form-control" style="height:70px;"></textarea>
-                                <button id="send" class="btn btn-primary" style="height:70%;">send</button>
-                            </div>
+                                    }
+                                    ?>
+                                </div>
+                                <div class="modal-footer">
+                                    <textarea id="message" class="form-control" style="height:70px;"></textarea>
+                                    <button id="send" class="btn btn-primary" style="height:70%;">send</button>
+                                </div>
+                            <?php endif; ?>
                         </div>
+
                     </div>
                 </div>
                 <div class="col-md-4">

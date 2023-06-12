@@ -1,7 +1,10 @@
 <?php
+session_start();
+if($_GET['id'] == $_SESSION['id']){
 if(isset($_SESSION['level']) && $_SESSION['level'] <3){
   header("Location: home.php");
 }
+
 	
   include("../conn/connMysqlObj.php");
   $sql_select = "SELECT id, bookname, sort, description, author, price FROM product WHERE id = ?";
@@ -238,3 +241,6 @@ if(isset($_SESSION['level']) && $_SESSION['level'] <3){
 </form>
 </body>
 </html>
+<?php }else{
+  header("Location: search.php");
+}?>

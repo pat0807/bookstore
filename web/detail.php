@@ -78,7 +78,7 @@ if (isset($_GET["id"])) {
         <div class="description">
             <h3>INFORMATION</h3>
             <div class="賣家">
-                賣家 <span><a href="chatbox2.php?account=<?php echo $product['account']; ?>&toUser=<?php echo $product['id']; ?>">
+                賣家 <span><a href="chatbox2.php?account=<?php echo $product['account']; ?>&toUser=<?php echo $product['member_id']; ?>">
                         <?php echo $product['account']; ?>
                     </a>
                     </span>

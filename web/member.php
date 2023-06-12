@@ -42,7 +42,7 @@ if(isset($_SESSION['name']) === false){
                     </div>
                     <div class="inputbox">
                         <ion-icon name="person-outline"></ion-icon>
-                        <input type="user" name="email" value="<?php echo $_SESSION['email']?>">
+                        <p><?php echo $_SESSION['email']?></p>
                         <label for="">信箱</label>
                     </div>
                     <div class="inputbox">

@@ -1,4 +1,6 @@
 <?php 
+
+if($_GET['id'] == $_SESSION['id']){
 if(isset($_SESSION['level']) && $_SESSION['level'] <3){
   header("Location: home.php");
 }
@@ -93,3 +95,6 @@ if(isset($_SESSION['level']) && $_SESSION['level'] <3){
 	$stmt -> close();
 	$db_link -> close();
 ?>
+<?php }else{
+  header("Location: search.php");
+}?>

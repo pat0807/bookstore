@@ -6,6 +6,7 @@ $keyword = isset($_GET['s']) ? $_GET['s'] : null;
 $sql = "SELECT * FROM product WHERE bookname like '%$keyword%' ";
 
 $stmt = $conn->prepare($sql);
+$stmt -> bindParam(':id' ,$memberid);
 $stmt->execute();
 
 $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -77,16 +78,26 @@ include("../conn/connMysqlObj.php");
                     <td>商品名稱</td>
                     <td>價錢</td>
                     <td>查看</td>
+                    <?php if(isset($_SESSION['level']) && $_SESSION['level'] >= 3){?>
+                    <td>修改</td>
+                    <td>刪除</td>
+                    <?php }?>
                 </tr>
                 <?php foreach($products as $product){?>
                 <tr>
-                    <td><img src="<?php echo $product['picture'] ?>" alt=""></td>
+                    <td><img src="../images/upload/<?php echo $product['picture'] ?>" alt=""></td>
                     <td><?php echo $product['bookname'] ?></td>
                     <td><?php echo $product['price'] ?></td>
                     <td><?php echo"<a href='detail.php?id=".$product["id"]."'>點擊查看</a> "?></td>
+                    <?php if(isset($_SESSION['level']) && $_SESSION['level'] >= 3){?>
+                    <?php if ($product["id"] == $_SESSION['id']){?>
                     <td><?php echo"<a href='update.php?id=".$product["id"]."'>修改</a> "?>
                     <td><?php echo"<a href='delete.php?id=".$product["id"]."'>刪除</a>"?>
-                    
+                    <?php }else{?>
+                    <td>-</td>
+                    <td>-</td>
+                    <?php }?>
+                    <?php }?>
                 </tr>
                 <?php }?>
                 

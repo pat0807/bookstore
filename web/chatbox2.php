@@ -11,7 +11,7 @@ if (isset($_SESSION['account']) && $_SESSION['account'] !== "") {
         or die("Failed to query the database: " . mysqli_error($connect));
     $name = mysqli_fetch_assoc($name);
 
-    $productAccount = isset($_GET['account']) ? $_GET['account'] : ""; // Get the specific account from details.php
+    $productAccount = isset($_GET['account']) ? $_GET['account'] : $product['member_id']; // Get the specific account from details.php
 
 ?>
 
@@ -53,7 +53,7 @@ if (isset($_SESSION['account']) && $_SESSION['account'] !== "") {
                     <div class="modal-header">
                         <h4>
                         <?php
-                            $toUser = isset($_GET["toUser"]) ? $_GET["toUser"] : $_SESSION["toUser"];
+                            $toUser = isset($_GET["toUser"]) ? $_GET["toUser"] : $product['member_id'];
                             $userNameQuery = mysqli_query($connect, "SELECT * FROM memberdata WHERE id = '" . $toUser . "' ")
                                 or die("Failed to query database" . mysqli_error($connect));
                     

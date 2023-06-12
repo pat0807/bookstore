@@ -4,6 +4,7 @@ if(isset($_SESSION['level']) && $_SESSION['level'] <3){
 }
 session_start();
 $account = $_SESSION["account"];
+$member_id = $_SESSION["id"];
 if(isset($_FILES["picture"])&&($_POST["action"]=="add")){
 	include("../conn/connect.php");
   
@@ -14,7 +15,8 @@ if(isset($_FILES["picture"])&&($_POST["action"]=="add")){
   $description = $_POST['description'];
   $author = $_POST['author'];
   $price = $_POST['price'];
-  
+
+  //enctype是files必備
   $file      = $_FILES['picture'];           //上傳檔案信息
   $file_name = $file['name'];                //上傳檔案的原來檔案名稱
   $file_type = $file['type'];                //上傳檔案的類型(副檔名)
@@ -24,7 +26,7 @@ if(isset($_FILES["picture"])&&($_POST["action"]=="add")){
   $imgsrc = $rand.$file_name;
 
  
-  $sql_str = "INSERT INTO product (bookname,sort,description,author,price,picture,account) VALUES (:bookname,:sort,:description,:author,:price,:picture,:account)";
+  $sql_str = "INSERT INTO product (bookname,sort,description,author,price,picture,account,member_id) VALUES (:bookname,:sort,:description,:author,:price,:picture,:account,:member_id)";
   $stmt = $conn -> prepare($sql_str);
   
   $stmt -> bindParam(':bookname' ,$bookname);
@@ -34,12 +36,13 @@ if(isset($_FILES["picture"])&&($_POST["action"]=="add")){
   $stmt -> bindParam(':price' ,$price);
   $stmt -> bindParam(':picture' ,$imgsrc);
   $stmt -> bindParam(':account' ,$account);
+  $stmt -> bindParam(':member_id' ,$member_id);
   $stmt ->execute();
 
 
-  $allow_ext = array('jpeg', 'jpg', 'png', 'gif','JPG','JPEG','PNG','GIF');
+  $allow_ext = array('jpeg', 'jpg', 'png', 'gif','JPG','JPEG','PNG','GIF'); //限制副檔名只能有這些
   $path = '../images/upload/';
-  if (!file_exists($path)) { mkdir($path); }
+  if (!file_exists($path)) { mkdir($path); } //mkdir如果沒有這個資料夾，建立一個
  
   //2.判斷上傳沒有錯誤時 => 檢查限制的條件 =============================================
   if ($error == 0) {
@@ -51,8 +54,8 @@ if(isset($_FILES["picture"])&&($_POST["action"]=="add")){
     $result = move_uploaded_file($tmp_name, $path.$file_name);
   
     if (file_exists($path.$file_name)) {
-      $result = copy($path.$file_name, $path.$rand.$file_name);
-      $result = unlink($path.$file_name);
+      $result = copy($path.$file_name, $path.$rand.$file_name);//複製圖片
+      $result = unlink($path.$file_name);//刪除圖片
     }
     // header('Location:newsCreate.php');
     echo "<script>alert('上傳成功!');window.location.href = ../index.php' </script>";
@@ -87,7 +90,8 @@ if(isset($_FILES["picture"])&&($_POST["action"]=="add")){
 
 <p align="center"><a href="../index.php">回主畫面</a></p>
 <form action="" method="post" name="formAdd" id="formAdd" enctype="multipart/form-data">
-  <table border="1" align="center" cellpadding="4">
+  <!-- action傳送資料到指定檔案，沒寫就是傳給自己；enctype是files必備，圖片要用form-data來接收 -->
+<table border="1" align="center" cellpadding="4">
     <tr>
       <th><font color="white">欄位</th></font><th><font color="white">資料</font></th>
     </tr>

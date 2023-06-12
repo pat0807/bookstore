@@ -9,7 +9,7 @@ $isset = false;
 
 // $cart_items = [];
 if(isset($_COOKIE['cart_items'])){
-    $cart_items = json_decode($_COOKIE['cart_items'],true);
+    $cart_items = json_decode($_COOKIE['cart_items'],true);//json_decode把php的json檔(文字)轉成陣列
     print_r($cart_items);
     foreach($cart_items as &$cart_item){
         if ($cart_item['id'] == $id){
@@ -27,6 +27,6 @@ if(isset($_COOKIE['cart_items'])){
 }
 header("Location: ../index.php");
 
-setcookie('cart_items',json_encode($cart_items),time() + 3600,'/');
+setcookie('cart_items',json_encode($cart_items),time() + 3600,'/');//json_encode把php的陣列轉成json檔(文字)，/是存在所有同一層的cookies
 
 ?>
